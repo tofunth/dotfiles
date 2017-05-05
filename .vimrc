@@ -63,6 +63,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-latex/vim-latex'
 Plugin 'crusoexia/vim-monokai'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'JamshedVesuna/vim-markdown-preview'
 
 " end plugin definition
 call vundle#end()            " required for vundle
@@ -98,3 +99,7 @@ if &term =~ '256color'
     "     " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
     set t_ut=
 endif
+
+" Vim markdown
+let vim_markdown_preview_github=1
+let vim_markdown_preview_temp_file=1
