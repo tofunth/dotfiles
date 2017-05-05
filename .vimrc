@@ -30,6 +30,7 @@ runtime macros/matchit.vim
 set fileformat=unix
 
 " Backspace works in Insert mode (e.g. not inserting a ^?), but won't delete over line breaks, or automatically-inserted indentation, or the place where insert mode started:
+" ref: http://vim.wikia.com/wiki/Backspace_and_delete_problems
 set backspace=indent,eol,start
 
 " search settings
@@ -48,11 +49,12 @@ set wildmode=list:longest
 set scrolloff=5
 
 " indentation
-set expandtab
-set autoindent
-set smartindent
-set shiftwidth=4
-set softtabstop=4
+set expandtab " force to use spaces for indentation 
+set autoindent " press Enter, start the new line at the same indent as the previous line
+set smartindent " treat *.py with 'tab' favor
+set shiftwidth=4 " block indent/unindent blocks using < and >
+set tabstop=4 " 4-space indent
+set softtabstop=4 " see multiple spaces as tabstops
 
 "----------------PLUGIN MANAGER
 " initialize Vundle
