@@ -66,6 +66,9 @@ Plugin 'vim-latex/vim-latex'
 Plugin 'crusoexia/vim-monokai'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+Plugin 'mkitt/tabline.vim'
 
 " end plugin definition
 call vundle#end()            " required for vundle
@@ -105,3 +108,19 @@ endif
 " Vim markdown
 let vim_markdown_preview_github=1
 let vim_markdown_preview_temp_file=1
+
+" NERDTree-related stuffs
+" toggle NERDTree with ctrl-n
+map <C-n> :NERDTreeToggle<CR> 
+
+" automatically open NERDTree when starting vim with a directory
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+
+" tabline
+hi TabLine      ctermfg=Black  ctermbg=Green     cterm=NONE
+hi TabLineFill  ctermfg=Black  ctermbg=Green     cterm=NONE
+hi TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
