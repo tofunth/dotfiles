@@ -48,6 +48,9 @@ set wildmode=list:longest
 " keep cursor visible within 5 lines
 set scrolloff=5
 
+" highlight the cursor
+set cursorline
+
 " indentation
 set expandtab " force to use spaces for indentation 
 set autoindent " press Enter, start the new line at the same indent as the previous line
@@ -105,9 +108,10 @@ if &term =~ '256color'
     set t_ut=
 endif
 
-" Vim markdown
+" Vim markdown preview
 let vim_markdown_preview_github=1
 let vim_markdown_preview_temp_file=1
+let vim_markdown_preview_hotkey='<C-m>'
 
 " NERDTree-related stuffs
 " toggle NERDTree with ctrl-n
@@ -121,6 +125,6 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 nmap <F8> :TagbarToggle<CR>
 
 " tabline
-hi TabLine      ctermfg=Black  ctermbg=Green     cterm=NONE
-hi TabLineFill  ctermfg=Black  ctermbg=Green     cterm=NONE
+hi TabLine      ctermfg=Black  ctermbg=Brown cterm=NONE
+hi TabLineFill  ctermfg=Black  ctermbg=Brown cterm=NONE
 hi TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
