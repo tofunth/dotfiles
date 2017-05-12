@@ -1,4 +1,5 @@
-"----------------BASIC CUSTOMIZATIONS
+" BASIC CUSTOMIZATIONS
+
 " set background
 set background=dark
 
@@ -59,7 +60,8 @@ set shiftwidth=4 " block indent/unindent blocks using < and >
 set tabstop=4 " 4-space indent
 set softtabstop=4 " see multiple spaces as tabstops
 
-"----------------PLUGIN MANAGER
+" PLUGIN MANAGER
+
 " initialize Vundle
 let &runtimepath.=',$HOME/.vim/bundle/Vundle.vim'
 call vundle#begin()
@@ -72,11 +74,13 @@ Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'mkitt/tabline.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'leshill/vim-json'
 
 " end plugin definition
 call vundle#end()            " required for vundle
 
-"----------------FROM NO PLUGINS
+" VANILLA VIM
 
 " fuzzy finding files
 set path+=**
@@ -92,14 +96,16 @@ let g:netrw_liststyle=3     " tree view
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
-"----------------VIM-LATEX
+" PLUGINs
+
+" vim-latex
 set shellslash
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_ViewRule_pdf = 'evince'
 
-"----------------THEME
+" theme
 colorscheme monokai
 if &term =~ '256color'
     " disable Background Color Erase (BCE) so that color schemes
