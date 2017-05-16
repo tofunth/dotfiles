@@ -76,6 +76,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'mkitt/tabline.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'leshill/vim-json'
+Plugin 'Chiel92/vim-autoformat'
 
 " end plugin definition
 call vundle#end()            " required for vundle
@@ -134,3 +135,6 @@ nmap <F8> :TagbarToggle<CR>
 hi TabLine      ctermfg=Black  ctermbg=Brown cterm=NONE
 hi TabLineFill  ctermfg=Black  ctermbg=Brown cterm=NONE
 hi TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
+
+" autoformat
+noremap <F3> :Autoformat<CR>
