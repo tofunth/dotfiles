@@ -77,6 +77,8 @@ Plugin 'mkitt/tabline.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'leshill/vim-json'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'tpope/vim-surround' " this plugin allows easy editing surrounding tags
+Plugin 'tpope/vim-ragtag' " a set of useful mappings to edit HTML, XML...
 
 " end plugin definition
 call vundle#end()            " required for vundle
