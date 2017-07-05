@@ -30,7 +30,9 @@ runtime macros/matchit.vim
 " set unix line ending
 set fileformat=unix
 
-" Backspace works in Insert mode (e.g. not inserting a ^?), but won't delete over line breaks, or automatically-inserted indentation, or the place where insert mode started:
+" Backspace works in Insert mode (e.g. not inserting a ^?), but won't delete
+" over line breaks, or automatically-inserted indentation, or the place where
+" insert mode started:
 " ref: http://vim.wikia.com/wiki/Backspace_and_delete_problems
 set backspace=indent,eol,start
 
@@ -60,28 +62,40 @@ set shiftwidth=4 " block indent/unindent blocks using < and >
 set tabstop=4 " 4-space indent
 set softtabstop=4 " see multiple spaces as tabstops
 
+" color column
+set colorcolumn=80
+
 " PLUGIN MANAGER
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" initialize Vundle
-let &runtimepath.=',$HOME/.vim/bundle/Vundle.vim'
-call vundle#begin()
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'vim-latex/vim-latex'
-Plugin 'crusoexia/vim-monokai'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'JamshedVesuna/vim-markdown-preview'
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-Plugin 'mkitt/tabline.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'leshill/vim-json'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'tpope/vim-surround' " this plugin allows easy editing surrounding tags
-Plugin 'mattn/emmet-vim' " this plugin is useful for html, xml editing (more advanced than ragtag)
+Plug 'gmarik/Vundle.vim'
+Plug 'vim-latex/vim-latex'
+Plug 'crusoexia/vim-monokai'
+Plug 'junegunn/seoul256.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar'
+Plug 'mkitt/tabline.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'leshill/vim-json'
+Plug 'Chiel92/vim-autoformat'
+Plug 'tpope/vim-surround' " this plugin allows easy editing surrounding tags
+Plug 'mattn/emmet-vim' " this plugin is useful for html, xml editing (more advanced than ragtag)
+Plug 'ternjs/tern_for_vim'
+Plug 'othree/javascript-libraries-syntax.vim' " syntax libraris for different js projects
+Plug 'burnettk/vim-angular'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Yggdroot/indentLine'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'Konfekt/FastFold'
 
-" end plugin definition
-call vundle#end()            " required for vundle
+" Initialize plugin system
+call plug#end()
 
 " VANILLA VIM
 
@@ -109,7 +123,8 @@ let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_ViewRule_pdf = 'evince'
 
 " theme
-colorscheme monokai
+let g:seoul256_background = 235 " ranging from 233 (darkest) to 239 (lightest)
+colo seoul256
 if &term =~ '256color'
     " disable Background Color Erase (BCE) so that color schemes
     "   " render properly when inside 256-color tmux and GNU screen.
@@ -133,6 +148,9 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 " tagbar
 nmap <F8> :TagbarToggle<CR>
 
+" JS libraries syntax
+let g:used_javascript_libs = 'angularjs,jasmine,gulp'
+
 " tabline
 hi TabLine      ctermfg=Black  ctermbg=Brown cterm=NONE
 hi TabLineFill  ctermfg=Black  ctermbg=Brown cterm=NONE
@@ -140,3 +158,9 @@ hi TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
 
 " autoformat
 noremap <F3> :Autoformat<CR>
+
+" indentation line
+let g:indentLine_char = '┆'
+
+" fzf"
+let g:fzf_layout = { 'right': '40%' }
