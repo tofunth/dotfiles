@@ -45,8 +45,19 @@ set nobackup
 set writebackup
 set noswapfile
 
+" display matching files
+set wildmenu
+
 " suggestion for normal mode commands
-set wildmode=list:longest
+set wildmode=longest:full,full
+
+" minimal menu bar
+let g:netrw_banner=0        " disable annoying banner
+let g:netrw_browse_split=4  " open in prior window
+let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+let g:netrw_list_hide=netrw_gitignore#Hide()
+let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
 " keep cursor visible within 5 lines
 set scrolloff=5
@@ -55,7 +66,7 @@ set scrolloff=5
 set cursorline
 
 " indentation
-set expandtab " force to use spaces for indentation 
+set expandtab " force to use spaces for indentation
 set autoindent " press Enter, start the new line at the same indent as the previous line
 set smartindent " treat *.py with 'tab' favor
 set shiftwidth=4 " block indent/unindent blocks using < and >
@@ -97,22 +108,6 @@ Plug 'Konfekt/FastFold'
 " Initialize plugin system
 call plug#end()
 
-" VANILLA VIM
-
-" fuzzy finding files
-set path+=**
-
-" display matching files
-set wildmenu
-
-" minimal menu bar 
-let g:netrw_banner=0        " disable annoying banner
-let g:netrw_browse_split=4  " open in prior window
-let g:netrw_altv=1          " open splits to the right
-let g:netrw_liststyle=3     " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
-
 " PLUGINs
 
 " vim-latex
@@ -139,7 +134,7 @@ let vim_markdown_preview_hotkey='<C-m>'
 
 " NERDTree-related stuffs
 " toggle NERDTree with ctrl-n
-map <C-n> :NERDTreeToggle<CR> 
+map <C-n> :NERDTreeToggle<CR>
 
 " automatically open NERDTree when starting vim with a directory
 autocmd StdinReadPre * let s:std_in=1
@@ -161,6 +156,13 @@ noremap <F3> :Autoformat<CR>
 
 " indentation line
 let g:indentLine_char = '┆'
+let g:indentLine_indentLevel = 8 " improve pfm. in big files (def. = 20)
 
-" fzf"
-let g:fzf_layout = { 'right': '40%' }
+" fzf
+let g:fzf_layout = { 'right': '40%' } " set fzf layout
+" ag word under cursor
+nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
+xnoremap <silent> <Leader>ag :<C-W>Ag <C-R><C-*><CR>
+" BLines word under cursor
+nnoremap <silent> <Leader>bl :BLines <C-R><C-W><CR>
+xnoremap <silent> <Leader>bl :<C-W>BLines <C-R><C-*><CR>
