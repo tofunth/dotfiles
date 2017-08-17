@@ -76,6 +76,10 @@ set softtabstop=4 " see multiple spaces as tabstops
 " color column
 set colorcolumn=80
 
+" more natural splitting
+set splitbelow
+set splitright
+
 " PLUGIN MANAGER
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -94,7 +98,8 @@ Plug 'mkitt/tabline.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'leshill/vim-json'
 Plug 'Chiel92/vim-autoformat'
-Plug 'tpope/vim-surround' " this plugin allows easy editing surrounding tags
+Plug 'tpope/vim-surround' " allow easy editing surrounding tags
+Plug 'tpope/vim-fugitive' " integrate Git
 Plug 'mattn/emmet-vim' " this plugin is useful for html, xml editing (more advanced than ragtag)
 Plug 'ternjs/tern_for_vim'
 Plug 'othree/javascript-libraries-syntax.vim' " syntax libraris for different js projects
@@ -159,7 +164,7 @@ let g:indentLine_char = '┆'
 let g:indentLine_indentLevel = 8 " improve pfm. in big files (def. = 20)
 
 " fzf
-let g:fzf_layout = { 'right': '40%' } " set fzf layout
+let g:fzf_layout = { 'right': '50%' } " set fzf layout
 " ag word under cursor
 nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
 xnoremap <silent> <Leader>ag :<C-W>Ag <C-R><C-*><CR>
