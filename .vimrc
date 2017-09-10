@@ -109,6 +109,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'Konfekt/FastFold'
+Plug 'python-mode/python-mode' " better python support than builtin one
+Plug 'w0rp/ale' " async lint
 
 " Initialize plugin system
 call plug#end()
@@ -124,7 +126,9 @@ let g:Tex_ViewRule_pdf = 'evince'
 
 " theme
 let g:seoul256_background = 235 " ranging from 233 (darkest) to 239 (lightest)
+let g:seoul256_light_background = 253 " ranging from 252 to 256
 colo seoul256
+" colo seoul256-light
 if &term =~ '256color'
     " disable Background Color Erase (BCE) so that color schemes
     "   " render properly when inside 256-color tmux and GNU screen.
@@ -171,3 +175,10 @@ xnoremap <silent> <Leader>ag :<C-W>Ag <C-R><C-*><CR>
 " BLines word under cursor
 nnoremap <silent> <Leader>bl :BLines <C-R><C-W><CR>
 xnoremap <silent> <Leader>bl :<C-W>BLines <C-R><C-*><CR>
+
+" Async Lint Engine
+let g:ale_enabled = 0 " disable ALE by default
+let g:ale_linters = {
+            \'python': ['flake8'],
+            \}
+          
