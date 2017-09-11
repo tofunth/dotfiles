@@ -80,6 +80,9 @@ set colorcolumn=80
 set splitbelow
 set splitright
 
+" more convenient macro-ing
+nnoremap <Space> @q
+
 " PLUGIN MANAGER
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -162,6 +165,7 @@ hi TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
 
 " autoformat
 noremap <F3> :Autoformat<CR>
+let g:formatter_yapf_style = 'pep8'
 
 " indentation line
 let g:indentLine_char = '┆'
@@ -181,4 +185,6 @@ let g:ale_enabled = 0 " disable ALE by default
 let g:ale_linters = {
             \'python': ['flake8'],
             \}
-          
+nnoremap <F2> :ALEToggle<CR>
+nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
+nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
