@@ -89,12 +89,8 @@ nnoremap <Space> @q
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'lervag/vimtex'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'ervandew/supertab'
 Plug 'crusoexia/vim-monokai'
+Plug 'vim-latex/vim-latex'
 Plug 'junegunn/seoul256.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'JamshedVesuna/vim-markdown-preview'
@@ -110,6 +106,7 @@ Plug 'mattn/emmet-vim' " this plugin is useful for html, xml editing (more advan
 Plug 'ternjs/tern_for_vim'
 Plug 'othree/javascript-libraries-syntax.vim' " syntax libraris for different js projects
 Plug 'burnettk/vim-angular'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -122,28 +119,14 @@ call plug#end()
 
 " PLUGINs
 
-let g:deoplete#enable_at_startup = 1
-
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
+" vim-latex
+set shellslash
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_ViewRule_pdf = 'evince'
+let g:tex_conceal = ""
+let g:Tex_GotoError=0
 
 " theme
 let g:seoul256_background = 235 " ranging from 233 (darkest) to 239 (lightest)
@@ -158,9 +141,16 @@ if &term =~ '256color'
 endif
 
 " Vim markdown preview
-let vim_markdown_preview_github=1
-let vim_markdown_preview_temp_file=1
+" let vim_markdown_preview_github=1 " there is an hourly limit 
+let vim_markdown_preview_pandoc=1
 let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_use_xdg_open=1
+let vim_markdown_preview_browser='chromium'
+let vim_markdown_preview_temp_file=1
+if g:vim_markdown_preview_temp_file == 1
+    sleep 1000m
+    call system('rm vim-markdown-preview.html')
+endif
 
 " NERDTree-related stuffs
 " toggle NERDTree with ctrl-n
