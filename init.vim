@@ -103,7 +103,7 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-surround' " allow easy editing surrounding tags
 Plug 'tpope/vim-fugitive' " integrate Git
 Plug 'mattn/emmet-vim' " this plugin is useful for html, xml editing (more advanced than ragtag)
-Plug 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'othree/javascript-libraries-syntax.vim' " syntax libraris for different js projects
 Plug 'burnettk/vim-angular'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
