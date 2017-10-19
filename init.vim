@@ -127,6 +127,16 @@ let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_ViewRule_pdf = 'evince'
 let g:tex_conceal = ""
 let g:Tex_GotoError=0
+let g:Tex_IgnoredWarnings =
+\'Underfull'."\n".
+\'Overfull'."\n".
+\'specifier changed to'."\n".
+\'You have requested'."\n".
+\'Missing number, treated as zero.'."\n".
+\'There were undefined references'."\n".
+\'Package lcg Warning:'."\n".
+\'Citation %.%# undefined'
+let g:Tex_IgnoreLevel = 8
 
 " theme
 let g:seoul256_background = 235 " ranging from 233 (darkest) to 239 (lightest)
