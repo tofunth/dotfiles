@@ -83,6 +83,11 @@ set splitright
 " more convenient macro-ing
 nnoremap <Space> @q
 
+" vim-matlab utils
+function! DoRemote(arg)
+    UpdateRemotePlugins
+endfunction
+
 " PLUGIN MANAGER
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -113,6 +118,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'Konfekt/FastFold'
 Plug 'python-mode/python-mode', {'branch': 'develop'} " better python support than builtin one
 Plug 'w0rp/ale' " async lint
+Plug 'daeyun/vim-matlab', { 'do': function('DoRemote') }
 
 " Initialize plugin system
 call plug#end()
@@ -124,6 +130,7 @@ set shellslash
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_MultipleCompileFormats='pdf,bibtex,pdf'
 let g:Tex_ViewRule_pdf = 'evince'
 let g:tex_conceal = ""
 let g:Tex_GotoError=0
