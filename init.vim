@@ -217,3 +217,7 @@ let g:ale_linters = {
 nnoremap <F2> :ALEToggle<CR>
 nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" vim-matlab
+let g:matlab_server_launcher = 'tmux' "launch the server in a tmux split
+nnoremap <silent> ,w :MatlabCliOpenWorkspace<CR>
