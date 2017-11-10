@@ -119,6 +119,8 @@ Plug 'Konfekt/FastFold'
 Plug 'python-mode/python-mode', {'branch': 'develop'} " better python support than builtin one
 Plug 'w0rp/ale' " async lint
 Plug 'daeyun/vim-matlab', { 'do': function('DoRemote') }
+Plug 'xolox/vim-session'
+Plug 'xolox/vim-misc'
 
 " Initialize plugin system
 call plug#end()
@@ -179,6 +181,8 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 " tagbar
 nmap <F8> :TagbarToggle<CR>
+let g:tagbar_autofocus = 1  " jump to tagbar right after opening
+let g:tagbar_sort = 0  " sort items according to their order in file
 
 " JS libraries syntax
 let g:used_javascript_libs = 'angularjs,jasmine,gulp'
@@ -221,3 +225,7 @@ nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 " vim-matlab
 let g:matlab_server_launcher = 'tmux' "launch the server in a tmux split
 nnoremap <silent> ,w :MatlabCliOpenWorkspace<CR>
+
+" vim-session
+let g:session_directory='~/progstuffs/nvim-session'
+let g:session_autosave='no'
