@@ -80,6 +80,9 @@ set splitright
 " more convenient macro-ing
 nnoremap <Space> @q
 
+" set GUI vim tab label: tab number + filename + sign
+set guitablabel=\[%N\]\ %t\ %M 
+
 " vim-matlab utils
 function! DoRemote(arg)
     UpdateRemotePlugins
@@ -210,6 +213,8 @@ xnoremap <silent> <Leader>ag :<C-W>Ag <C-R><C-*><CR>
 " BLines word under cursor
 nnoremap <silent> <Leader>bl :BLines <C-R><C-W><CR>
 xnoremap <silent> <Leader>bl :<C-W>BLines <C-R><C-*><CR>
+" Map F4 to Buffers
+nnoremap <F4> :Buffers<CR>
 
 " Python-mode
 let g:pymode_rope = 0
@@ -225,6 +230,5 @@ nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " vim-session
-let g:session_directory='~/progstuffs/nvim-session'
+let g:session_directory='~/progstuffs/vim-session'
 let g:session_autosave='no'
-
