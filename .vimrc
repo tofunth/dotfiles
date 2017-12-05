@@ -83,6 +83,11 @@ nnoremap <Space> @q
 " set GUI vim tab label: tab number + filename + sign
 set guitablabel=\[%N\]\ %t\ %M 
 
+" set GUI font
+if has('gui_running')
+    set guifont=Ubuntu\ Mono\ 13
+endif
+
 " vim-matlab utils
 function! DoRemote(arg)
     UpdateRemotePlugins
@@ -122,6 +127,8 @@ Plug 'w0rp/ale' " async lint
 Plug 'daeyun/vim-matlab', { 'do': function('DoRemote') }
 Plug 'xolox/vim-session'
 Plug 'xolox/vim-misc'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Initialize plugin system
 call plug#end()
@@ -232,3 +239,12 @@ nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 " vim-session
 let g:session_directory='~/progstuffs/vim-session'
 let g:session_autosave='no'
+
+" snippets
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-f>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
