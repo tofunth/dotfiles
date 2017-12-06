@@ -85,7 +85,7 @@ set guitablabel=\[%N\]\ %t\ %M
 
 " set GUI font
 if has('gui_running')
-    set guifont=Ubuntu\ Mono\ 13
+    set guifont=Inconsolata\ Regular\ 13
 endif
 
 " vim-matlab utils
