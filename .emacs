@@ -28,12 +28,8 @@
 (setq-default whitespace-style '(face lines-tail))
 (global-whitespace-mode t)
 
-;; IDO mode
-(require 'ido)
-(ido-mode t)
 
-
-;; SOME EXTRA PACKAGES
+;; EXTERNAL PACKAGES
 (require 'package)
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
@@ -66,9 +62,35 @@
   (global-evil-tabs-mode t))
 
 
-(use-package ivy
-  :ensure t)
+(use-package counsel
+  :ensure t
+  )
 
+
+(use-package swiper
+  :ensure t
+  )
+
+
+(use-package find-file-in-project
+  :ensure t
+  )
+
+
+(use-package ivy
+  :ensure t
+  :config
+  (ivy-mode 1)
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+  (setq ivy-use-virtual-buffers t)
+ )
+
+
+(use-package elpy
+  :ensure t
+  :config
+  (elpy-enable)
+)
 
 (use-package seoul256-theme
   :ensure t
@@ -83,6 +105,20 @@
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
 
 
+(use-package neotree
+  :ensure t
+  :config
+  (global-set-key [f8] 'neotree-toggle)
+  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+  (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+  (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+  (evil-define-key 'normal neotree-mode-map (kbd "R") 'neotree-change-root)
+  (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-select-previous-sibling-node)
+  (evil-define-key 'normal neotree-mode-map (kbd "L") 'neotree-select-next-sibling-node)
+)
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -90,7 +126,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (highlight-indent-guides ivy evil-tabs evil use-package seoul256-theme))))
+    (elpy anaconda-mode find-file-in-project flx counsel neotree highlight-indent-guides ivy evil-tabs evil use-package seoul256-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
