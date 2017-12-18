@@ -28,6 +28,10 @@
 (setq-default whitespace-style '(face lines-tail))
 (global-whitespace-mode t)
 
+;; IDO mode
+(require 'ido)
+(ido-mode t)
+
 
 ;; SOME EXTRA PACKAGES
 (require 'package)
