@@ -53,7 +53,7 @@
   (evil-mode 1))
 
 (setq-default evil-vsplit-window-right t)
-(setq-default evil-split-window-below-t)
+(setq-default evil-split-window-below t)
 
 
 (use-package evil-tabs
