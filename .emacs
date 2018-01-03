@@ -1,4 +1,7 @@
 ;; CUSTOMIZE SOME BUILTIN VARIABLES
+;; disable start up page
+(setq inhibit-startup-screen t)
+
 ;; use spaces, not tabs
 (setq-default indent-tabs-mode nil)
 
