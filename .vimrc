@@ -118,7 +118,7 @@ Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'othree/javascript-libraries-syntax.vim' " syntax libraris for different js projects
 Plug 'burnettk/vim-angular'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-Plug 'Yggdroot/indentLine'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'Konfekt/FastFold'
@@ -208,9 +208,8 @@ hi TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
 noremap <F3> :Autoformat<CR>
 let g:formatter_yapf_style = 'pep8'
 
-" indentation line
-let g:indentLine_char = '┆'
-let g:indentLine_indentLevel = 8 " improve pfm. in big files (def. = 20)
+" indent guides
+let g:indent_guides_enable_on_vim_startup = 1
 
 " fzf
 let g:fzf_layout = { 'right': '50%' } " set fzf layout
