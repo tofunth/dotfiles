@@ -2,6 +2,14 @@
 ;; disable start up page
 (setq inhibit-startup-screen t)
 
+;; start emacs & new frame in fullscreen
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;; set fonts
+(add-to-list 'default-frame-alist '(font . "10"))
+(set-face-attribute 'default t :font "10")
+
 ;; use spaces, not tabs
 (setq-default indent-tabs-mode nil)
 
@@ -12,12 +20,11 @@
 (setq-default require-final-newline t)
 
 
-;; ENABLE SOME MODES BY DEFAULT
-;; show corresponding brackets
-(show-paren-mode 1)
-
 ;; display line number
 (global-linum-mode t)
+
+;; save mode
+(desktop-save-mode 1)
 
 ;; highlight current line
 (global-hl-line-mode 1)
@@ -59,23 +66,12 @@
 (setq-default evil-split-window-below t)
 
 
-(use-package evil-tabs
-  :ensure t
-  :config
-  (global-evil-tabs-mode t))
-
-
 (use-package counsel
   :ensure t
   )
 
 
 (use-package swiper
-  :ensure t
-  )
-
-
-(use-package find-file-in-project
   :ensure t
   )
 
@@ -93,6 +89,7 @@
   :ensure t
   :config
   (elpy-enable)
+  (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 )
 
 (use-package seoul256-theme
@@ -108,27 +105,54 @@
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
 
 
-(use-package neotree
+(use-package treemacs
   :ensure t
   :config
-  (global-set-key [f8] 'neotree-toggle)
-  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-  (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-  (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
-  (evil-define-key 'normal neotree-mode-map (kbd "R") 'neotree-change-root)
-  (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-select-previous-sibling-node)
-  (evil-define-key 'normal neotree-mode-map (kbd "L") 'neotree-select-next-sibling-node)
+  (global-set-key [f8] 'treemacs-toggle)
+)
+
+
+(use-package treemacs-evil
+  :ensure t
 )
 
 
 (use-package magit
   :ensure t
+  :config
+  (global-set-key (kbd "C-x g") 'magit-status)
 )
 
 
 (use-package evil-magit
   :ensure t
+)
+
+
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-global-mode)
+)
+
+
+(use-package counsel-projectile
+  :ensure t
+)
+
+
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+)
+
+
+(use-package js2-mode
+  :ensure t
+  :config
+  (add-hook 'js-mode-hook 'js2-minor-mode)
+  (add-hook 'js2-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 )
 
 
@@ -139,7 +163,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (elpy anaconda-mode find-file-in-project flx counsel neotree highlight-indent-guides ivy evil-tabs evil use-package seoul256-theme))))
+    (treemacs-evil treemacs counsel-projectile js2-mode elpy anaconda-mode find-file-in-project flx counsel neotree highlight-indent-guides ivy evil-tabs evil use-package seoul256-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
