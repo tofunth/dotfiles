@@ -7,8 +7,8 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; set fonts
-(add-to-list 'default-frame-alist '(font . "10"))
-(set-face-attribute 'default t :font "10")
+(add-to-list 'default-frame-alist '(font . "Ubuntu Mono-13"))
+(set-face-attribute 'default t :font "Ubuntu Mono-13")
 
 ;; use spaces, not tabs
 (setq-default indent-tabs-mode nil)
@@ -156,6 +156,21 @@
 )
 
 
+(use-package sublimity
+  :ensure t
+  :config
+  (require 'sublimity)
+  (require 'sublimity-scroll)
+  (sublimity-mode 1)
+)
+
+
+(use-package tex
+  :ensure auctex
+  :config
+  (setq reftex-plug-into-AUCTeX t)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
+)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -163,7 +178,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (treemacs-evil treemacs counsel-projectile js2-mode elpy anaconda-mode find-file-in-project flx counsel neotree highlight-indent-guides ivy evil-tabs evil use-package seoul256-theme))))
+    (use-package treemacs-evil sublimity seoul256-theme neotree js2-mode highlight-indent-guides flx evil-tabs evil-magit elpy counsel-projectile auctex anaconda-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
