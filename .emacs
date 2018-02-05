@@ -38,6 +38,8 @@
 (setq-default whitespace-style '(face lines-tail))
 (global-whitespace-mode t)
 
+;; preserve point on scrolling
+(setq scroll-preserve-screen-position t)
 
 ;; EXTERNAL PACKAGES
 (require 'package)
