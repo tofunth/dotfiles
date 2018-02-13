@@ -7,8 +7,8 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; set fonts
-(add-to-list 'default-frame-alist '(font . "Ubuntu Mono-13"))
-(set-face-attribute 'default t :font "Ubuntu Mono-13")
+(add-to-list 'default-frame-alist '(font . "Ubuntu Mono-11"))
+(set-face-attribute 'default t :font "Ubuntu Mono-11")
 
 ;; use spaces, not tabs
 (setq-default indent-tabs-mode nil)
@@ -40,6 +40,13 @@
 
 ;; preserve point on scrolling
 (setq scroll-preserve-screen-position t)
+
+;; scrolloff by 5 lines
+(setq scroll-margin 5)
+
+;; one solution for smooth scrolling on https://www.emacswiki.org/emacs/SmoothScrolling
+(setq scroll-step 1
+      scroll-conservatively 10000)
 
 ;; EXTERNAL PACKAGES
 (require 'package)
@@ -155,15 +162,6 @@
   :config
   (add-hook 'js-mode-hook 'js2-minor-mode)
   (add-hook 'js2-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
-)
-
-
-(use-package sublimity
-  :ensure t
-  :config
-  (require 'sublimity)
-  (require 'sublimity-scroll)
-  (sublimity-mode 1)
 )
 
 
