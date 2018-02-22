@@ -101,11 +101,12 @@
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 )
 
-(use-package seoul256-theme
-  :ensure t
-  :config
-  (setq seoul256-background 235)
-  (load-theme 'seoul256 t))
+;(use-package seoul256-theme
+;  :ensure t
+;  :config
+;  (setq seoul256-background 235)
+;  (load-theme 'seoul256 t)
+;)
 
 
 (use-package highlight-indent-guides
@@ -154,6 +155,10 @@
   :ensure t
   :config
   (add-hook 'after-init-hook 'global-company-mode)
+  (with-eval-after-load 'company
+    (define-key company-active-map (kbd "<return>") nil)
+    (define-key company-active-map (kbd "RET") nil)
+    (define-key company-active-map (kbd "C-SPC") #'company-complete-selection))
 )
 
 
