@@ -48,6 +48,12 @@
 (setq scroll-step 1
       scroll-conservatively 10000)
 
+;; set html indentation to 2 spaces
+(add-hook 'html-mode-hook
+        (lambda ()
+          ;; Default indentation is usually 2 spaces
+          (set (make-local-variable 'sgml-basic-offset) 2)))
+
 ;; EXTERNAL PACKAGES
 (require 'package)
 
