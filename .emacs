@@ -7,8 +7,8 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; set fonts
-(add-to-list 'default-frame-alist '(font . "Ubuntu Mono-11"))
-(set-face-attribute 'default t :font "Ubuntu Mono-11")
+(add-to-list 'default-frame-alist '(font . "Ubuntu Mono-13"))
+(set-face-attribute 'default t :font "Ubuntu Mono-13")
 
 ;; use spaces, not tabs
 (setq-default indent-tabs-mode nil)
