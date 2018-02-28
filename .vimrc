@@ -158,7 +158,7 @@ call plug#end()
 " theme
 let g:seoul256_background = 235 " ranging from 233 (darkest) to 239 (lightest)
 let g:seoul256_light_background = 253 " ranging from 252 to 256
-colo seoul256
+" colo seoul256
 " colo seoul256-light
 " colo monokai
 if &term =~ '256color'
