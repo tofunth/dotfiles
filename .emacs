@@ -1,4 +1,8 @@
 ;; CUSTOMIZE SOME BUILTIN VARIABLES
+
+;; auto revert mode
+(global-auto-revert-mode 1)
+
 ;; disable start up page
 (setq inhibit-startup-screen t)
 
@@ -136,7 +140,8 @@
 (use-package magit
   :ensure t
   :config
-  (global-set-key (kbd "C-x g") 'magit-status)
+  (global-set-key (kbd "C-c g s") 'magit-status)
+  (global-set-key (kbd "C-c g b") 'magit-blame)
 )
 
 
@@ -154,6 +159,8 @@
 
 (use-package counsel-projectile
   :ensure t
+  :config
+  (counsel-projectile-mode)
 )
 
 
@@ -164,7 +171,7 @@
   (with-eval-after-load 'company
     (define-key company-active-map (kbd "<return>") nil)
     (define-key company-active-map (kbd "RET") nil)
-    (define-key company-active-map (kbd "C-SPC") #'company-complete-selection))
+    (define-key company-active-map (kbd "M-RET") #'company-complete-selection))
 )
 
 
