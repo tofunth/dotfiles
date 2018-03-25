@@ -84,6 +84,11 @@
 (setq-default evil-vsplit-window-right t)
 (setq-default evil-split-window-below t)
 
+(use-package evil-matchit
+  :ensure t
+  :config
+  (global-evil-matchit-mode 1)
+)
 
 (use-package counsel
   :ensure t
@@ -171,7 +176,8 @@
   (with-eval-after-load 'company
     (define-key company-active-map (kbd "<return>") nil)
     (define-key company-active-map (kbd "RET") nil)
-    (define-key company-active-map (kbd "M-RET") #'company-complete-selection))
+    (define-key company-active-map (kbd "M-RET") #'company-complete-selection)
+    (define-key company-active-map (kbd "C-w") 'evil-delete-backward-word))
 )
 
 
@@ -196,7 +202,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (use-package treemacs-evil sublimity seoul256-theme neotree js2-mode highlight-indent-guides flx evil-tabs evil-magit elpy counsel-projectile auctex anaconda-mode))))
+    (evil-matchit use-package treemacs-evil sublimity seoul256-theme neotree js2-mode highlight-indent-guides flx evil-tabs evil-magit elpy counsel-projectile auctex anaconda-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
