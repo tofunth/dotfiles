@@ -11,8 +11,8 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; set fonts
-(add-to-list 'default-frame-alist '(font . "Ubuntu Mono-13"))
-(set-face-attribute 'default t :font "Ubuntu Mono-13")
+(add-to-list 'default-frame-alist '(font . "Dina-10"))
+(set-face-attribute 'default t :font "Dina-10")
 
 ;; use spaces, not tabs
 (setq-default indent-tabs-mode nil)
@@ -116,12 +116,12 @@
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 )
 
-;(use-package seoul256-theme
-;  :ensure t
-;  :config
-;  (setq seoul256-background 235)
-;  (load-theme 'seoul256 t)
-;)
+(use-package seoul256-theme
+  :ensure t
+  :config
+  (setq seoul256-background 235)
+  (load-theme 'seoul256 t)
+)
 
 
 (use-package highlight-indent-guides
@@ -147,6 +147,9 @@
   :config
   (global-set-key (kbd "C-c g s") 'magit-status)
   (global-set-key (kbd "C-c g b") 'magit-blame)
+  (global-set-key (kbd "C-c g k m") 'smerge-keep-mine)
+  (global-set-key (kbd "C-c g k o") 'smerge-keep-other)
+  (global-set-key (kbd "C-c g k a") 'smerge-keep-all)
 )
 
 
@@ -195,11 +198,21 @@
   (setq reftex-plug-into-AUCTeX t)
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)   ; with AUCTeX LaTeX mode
 )
+
+;(use-package solarized-theme
+;  :ensure t
+;  :config
+;  (load-theme 'solarized-dark t)
+;)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(package-selected-packages
    (quote
     (evil-matchit use-package treemacs-evil sublimity seoul256-theme neotree js2-mode highlight-indent-guides flx evil-tabs evil-magit elpy counsel-projectile auctex anaconda-mode))))
