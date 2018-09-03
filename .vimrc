@@ -113,17 +113,18 @@ Plug 'leshill/vim-json'
 " Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-surround' " allow easy editing surrounding tags
 Plug 'tpope/vim-fugitive' " integrate Git
+Plug 'tpope/vim-eunuch' " Some useful shell commands
 Plug 'mattn/emmet-vim' " this plugin is useful for html, xml editing (more advanced than ragtag)
 " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'othree/javascript-libraries-syntax.vim' " syntax libraris for different js projects
 " Plug 'burnettk/vim-angular'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'Konfekt/FastFold'
 " Plug 'python-mode/python-mode', {'branch': 'develop'} " better python support than builtin one
-" Plug 'w0rp/ale' " async lint
+Plug 'w0rp/ale' " async lint
 " Plug 'daeyun/vim-matlab', { 'do': function('DoRemote') }
 " Plug 'xolox/vim-session'
 " Plug 'xolox/vim-misc'
@@ -158,7 +159,7 @@ call plug#end()
 " theme
 let g:seoul256_background = 235 " ranging from 233 (darkest) to 239 (lightest)
 let g:seoul256_light_background = 253 " ranging from 252 to 256
-" colo seoul256
+colo seoul256
 " colo seoul256-light
 " colo monokai
 if &term =~ '256color'
@@ -227,13 +228,13 @@ nnoremap <F4> :Buffers<CR>
 "" let g:pymode_lint_on_write = 0
 
 " Async Lint Engine
-"" let g:ale_enabled = 0 " disable ALE by default
-"" let g:ale_linters = {
-""             \'python': ['flake8'],
-""             \}
-"" nnoremap <F2> :ALEToggle<CR>
-"" nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
-"" nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_enabled = 0 " disable ALE by default
+let g:ale_linters = {
+            \'python': ['flake8'],
+            \}
+nnoremap <F2> :ALEToggle<CR>
+nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
+nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " vim-session
 "" let g:session_directory='~/progstuffs/vim-session'
@@ -241,9 +242,9 @@ nnoremap <F4> :Buffers<CR>
 
 " snippets
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"" let g:UltiSnipsExpandTrigger="<c-f>"
-"" let g:UltiSnipsJumpForwardTrigger="<c-l>"
-"" let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+let g:UltiSnipsExpandTrigger="<c-f>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 
 " If you want :UltiSnipsEdit to split your window.
 "" let g:UltiSnipsEditSplit="vertical"

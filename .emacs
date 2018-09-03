@@ -11,8 +11,8 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; set fonts
-(add-to-list 'default-frame-alist '(font . "Dina-10"))
-(set-face-attribute 'default t :font "Dina-10")
+(add-to-list 'default-frame-alist '(font . "Monospace-10"))
+(set-face-attribute 'default t :font "Monospace-10")
 
 ;; use spaces, not tabs
 (setq-default indent-tabs-mode nil)
@@ -79,7 +79,10 @@
 (use-package evil
   :ensure t
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  (modify-syntax-entry ?_ "w")
+  (setq x-select-enable-clipboard nil)
+)
 
 (setq-default evil-vsplit-window-right t)
 (setq-default evil-split-window-below t)
@@ -92,8 +95,11 @@
 
 (use-package counsel
   :ensure t
+  :config
+  (global-set-key (kbd "C-c c g") 'counsel-git)
+  (global-set-key (kbd "C-c c j") 'counsel-git-grep)
+  (global-set-key (kbd "C-c c C-r") 'ivy-resume)
   )
-
 
 (use-package swiper
   :ensure t
@@ -113,13 +119,13 @@
   :ensure t
   :config
   (elpy-enable)
-  (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 )
 
 (use-package seoul256-theme
   :ensure t
   :config
-  (setq seoul256-background 235)
+  (setq seoul256-background 235
+        seoul256-alternate-background 238)
   (load-theme 'seoul256 t)
 )
 
@@ -133,7 +139,7 @@
 (use-package treemacs
   :ensure t
   :config
-  (global-set-key [f8] 'treemacs-toggle)
+  (global-set-key [f8] 'treemacs)
 )
 
 
@@ -162,6 +168,9 @@
   :ensure t
   :config
   (projectile-global-mode)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-indexing-method 'native)
+  (setq projectile-enable-caching t)
 )
 
 
@@ -169,6 +178,21 @@
   :ensure t
   :config
   (counsel-projectile-mode)
+)
+
+
+(use-package ag
+  :ensure t
+)
+
+
+(use-package rg
+  :ensure t
+)
+
+
+(use-package fzf
+  :ensure t
 )
 
 
@@ -205,17 +229,62 @@
 ;  (load-theme 'solarized-dark t)
 ;)
 
+(use-package markdown-mode
+  :ensure t
+)
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
+
+(use-package go-eldoc
+  :ensure t)
+
+
+(use-package company-go
+  :config (setq company-go-show-annotation t)
+  :ensure t)
+
+
+(use-package go-mode
+  :ensure t
+  :mode ("\\.go\\'" . go-mode)
+  :config
+ )
+
+
+(use-package flymd
+  :ensure t
+  :config
+  (defun my-flymd-browser-function (url)
+     (let ((browse-url-browser-function 'browse-url-firefox))
+       (browse-url url)))
+   (setq flymd-browser-open-function 'my-flymd-browser-function)
+ )
+
+
+(use-package yaml-mode
+  :ensure t
+  :mode
+  ("\\.yml\\'" . yaml-mode)
+  ("\\.yml.j2\\'" . yaml-mode)
+ )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(package-selected-packages
    (quote
-    (evil-matchit use-package treemacs-evil sublimity seoul256-theme neotree js2-mode highlight-indent-guides flx evil-tabs evil-magit elpy counsel-projectile auctex anaconda-mode))))
+    (fzf counsel-projectile yaml-mode use-package treemacs-evil sublimity seoul256-theme rg neotree markdown-preview-mode js2-mode highlight-indent-guides go-eldoc flymd evil-tabs evil-org evil-matchit evil-magit elpy company-go auto-dim-other-buffers auctex ag))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
