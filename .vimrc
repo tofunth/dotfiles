@@ -62,6 +62,14 @@ set scrolloff=5
 " highlight the cursor
 set cursorline
 
+" enable mouse rolling
+if has("mouse")
+    set mouse=a
+endif
+
+" switch paste mode
+set pastetoggle=<F2>
+
 " indentation
 set expandtab " force to use spaces for indentation
 set autoindent " press Enter, start the new line at the same indent as the previous line
@@ -88,11 +96,6 @@ if has('gui_running')
     set guifont=Inconsolata\ Regular\ 13
 endif
 
-" vim-matlab utils
-"" function! DoRemote(arg)
-""     UpdateRemotePlugins
-"" endfunction
-
 " PLUGIN MANAGER
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -105,6 +108,8 @@ Plug 'crusoexia/vim-monokai'
 Plug 'junegunn/seoul256.vim'
 Plug 'altercation/vim-colors-solarized'
 " Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
 Plug 'mkitt/tabline.vim'
@@ -125,12 +130,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'Konfekt/FastFold'
 " Plug 'python-mode/python-mode', {'branch': 'develop'} " better python support than builtin one
 Plug 'w0rp/ale' " async lint
-" Plug 'daeyun/vim-matlab', { 'do': function('DoRemote') }
 " Plug 'xolox/vim-session'
 " Plug 'xolox/vim-misc'
 " Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
-
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Initialize plugin system
 call plug#end()
 
@@ -222,6 +226,12 @@ nnoremap <silent> <Leader>bl :BLines <C-R><C-W><CR>
 xnoremap <silent> <Leader>bl :<C-W>BLines <C-R><C-*><CR>
 " Map F4 to Buffers
 nnoremap <F4> :Buffers<CR>
+" File files in project (including non-gitted)
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
 
 " Python-mode
 "" let g:pymode_rope = 0
@@ -232,7 +242,7 @@ let g:ale_enabled = 0 " disable ALE by default
 let g:ale_linters = {
             \'python': ['flake8'],
             \}
-nnoremap <F2> :ALEToggle<CR>
+nnoremap <F6> :ALEToggle<CR>
 nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
 nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
 
