@@ -9,6 +9,9 @@ syntax on
 " turn on line numbering
 set number
 
+" hide buffer when switching, thus undo history is retained
+set hidden
+
 " make vim try to detect file types
 filetype on
 filetype plugin on
@@ -37,10 +40,17 @@ set backspace=indent,eol,start
 set incsearch
 set hlsearch
 
+" case-related search
+set ignorecase " case insensitive searching
+set smartcase " when a search pattern includes uppcase, this search is sensitive
+
 " remove .ext~ files but not the swapfiles
 set nobackup
 set writebackup
 set noswapfile
+
+" longer timeout for <Leader> key
+set timeoutlen=8000
 
 " display matching files
 set wildmenu
@@ -64,7 +74,7 @@ set cursorline
 
 " enable mouse rolling
 if has("mouse")
-    set mouse=a
+    set mouse=v
 endif
 
 " switch paste mode
@@ -96,6 +106,10 @@ if has('gui_running')
     set guifont=Inconsolata\ Regular\ 13
 endif
 
+" Disable format option with command 'o' in normal mode not to have it
+" continue in commenting
+autocmd BufRead,BufNewFile * set formatoptions-=o
+
 " PLUGIN MANAGER
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -103,11 +117,9 @@ endif
 call plug#begin('~/.vim/plugged')
 " call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'crusoexia/vim-monokai'
 " Plug 'vim-latex/vim-latex'
 Plug 'junegunn/seoul256.vim'
 Plug 'altercation/vim-colors-solarized'
-" Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/nerdtree'
@@ -122,7 +134,6 @@ Plug 'tpope/vim-eunuch' " Some useful shell commands
 Plug 'mattn/emmet-vim' " this plugin is useful for html, xml editing (more advanced than ragtag)
 " Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'othree/javascript-libraries-syntax.vim' " syntax libraris for different js projects
-" Plug 'burnettk/vim-angular'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -135,6 +146,8 @@ Plug 'w0rp/ale' " async lint
 " Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'vimwiki/vimwiki'
+Plug 'sheerun/vim-polyglot'
 " Initialize plugin system
 call plug#end()
 
@@ -165,7 +178,6 @@ let g:seoul256_background = 235 " ranging from 233 (darkest) to 239 (lightest)
 let g:seoul256_light_background = 253 " ranging from 252 to 256
 colo seoul256
 " colo seoul256-light
-" colo monokai
 if &term =~ '256color'
     " disable Background Color Erase (BCE) so that color schemes
     "   " render properly when inside 256-color tmux and GNU screen.
@@ -176,21 +188,9 @@ endif
 " set background
 " set background=light
 
-" Vim markdown preview
-" let vim_markdown_preview_github=1 " there is an hourly limit 
-"" let vim_markdown_preview_pandoc=1
-"" let vim_markdown_preview_hotkey='<C-m>'
-"" let vim_markdown_preview_use_xdg_open=1
-"" let vim_markdown_preview_browser='chromium'
-"" let vim_markdown_preview_temp_file=1
-"" if g:vim_markdown_preview_temp_file == 1
-""     sleep 1000m
-""     call system('rm vim-markdown-preview.html')
-"" endif
-
-" NERDTree-related stuffs
-" toggle NERDTree with ctrl-n
-map <C-n> :NERDTreeToggle<CR>
+" NERDTree-related shortcuts
+nnoremap <silent> <Leader>nn :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>nf :NERDTreeFind<CR>
 
 " automatically open NERDTree when starting vim with a directory
 autocmd StdinReadPre * let s:std_in=1
@@ -217,21 +217,47 @@ let g:formatter_yapf_style = 'pep8'
 let g:indent_guides_enable_on_vim_startup = 1
 
 " fzf
-let g:fzf_layout = { 'right': '50%' } " set fzf layout
-" ag word under cursor
-nnoremap <silent> <Leader>ag :Ag <C-R><C-W><CR>
-xnoremap <silent> <Leader>ag :<C-W>Ag <C-R><C-*><CR>
+
+" Command for git grep
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
+let g:fzf_layout = { 'down': '30%' } " set fzf layout
+
 " BLines word under cursor
-nnoremap <silent> <Leader>bl :BLines <C-R><C-W><CR>
-xnoremap <silent> <Leader>bl :<C-W>BLines <C-R><C-*><CR>
-" Map F4 to Buffers
-nnoremap <F4> :Buffers<CR>
+nnoremap <silent> <Leader>,bl :BLines <C-R><C-W><CR>
+xnoremap <silent> <Leader>,bl :<C-W>BLines <C-R><C-*><CR>
+" Files  word under cursor
+nnoremap <silent> <Leader>,ff :Files <C-R><C-W><CR>
+xnoremap <silent> <Leader>,ff :<C-W>Files <C-R><C-*><CR>
+" GFiles  word under cursor
+nnoremap <silent> <Leader>,gf :GFiles <C-R><C-W><CR>
+xnoremap <silent> <Leader>,gf :<C-W>GFiles <C-R><C-*><CR>
+" GGrep  word under cursor
+nnoremap <silent> <Leader>,gg :GGrep <C-R><C-W><CR>
+xnoremap <silent> <Leader>,gg :<C-W>GGrep <C-R><C-*><CR>
+" rg word under cursor
+nnoremap <silent> <Leader>,rr :Rg <C-R><C-W><CR>
+xnoremap <silent> <Leader>,rr :<C-W>Rg <C-R><C-*><CR>
+" Buffers shortcut
+nnoremap <silent> <Leader>rr :Rg<CR>
+nnoremap <silent> <Leader>bb :Buffers<CR>
+nnoremap <silent> <Leader>ff :Files<CR>
+nnoremap <silent> <Leader>pf :ProjectFiles<CR>
+nnoremap <silent> <Leader>gf :GFiles<CR>
+nnoremap <silent> <Leader>gg :GGrep<CR>
 " File files in project (including non-gitted)
 function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()
+
+" Quickfix stuffs
+nnoremap <F4> :cprev<CR>
+nnoremap <F5> :cnext<CR>
 
 " Python-mode
 "" let g:pymode_rope = 0
@@ -240,11 +266,11 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 " Async Lint Engine
 let g:ale_enabled = 0 " disable ALE by default
 let g:ale_linters = {
-            \'python': ['flake8'],
+            \'python': ['flake8', 'pylint'],
             \}
 nnoremap <F6> :ALEToggle<CR>
-nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
-nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
+nmap ]a <Plug>(ale_next_wrap)
+nmap [a <Plug>(ale_previous_wrap)
 
 " vim-session
 "" let g:session_directory='~/progstuffs/vim-session'
@@ -258,3 +284,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 
 " If you want :UltiSnipsEdit to split your window.
 "" let g:UltiSnipsEditSplit="vertical"
+
+" Ripgrep
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+nnoremap <silent> <Leader>,rg :grep <C-R><C-W><CR>
+xnoremap <silent> <Leader>,rg :<C-W>grep <C-R><C-*><CR>
