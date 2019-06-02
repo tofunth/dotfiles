@@ -119,6 +119,7 @@ call plug#begin('~/.vim/plugged')
 
 " Plug 'vim-latex/vim-latex'
 Plug 'junegunn/seoul256.vim'
+Plug 'jsit/disco.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
@@ -176,8 +177,9 @@ call plug#end()
 " theme
 let g:seoul256_background = 235 " ranging from 233 (darkest) to 239 (lightest)
 let g:seoul256_light_background = 253 " ranging from 252 to 256
-colo seoul256
-" colo seoul256-light
+""colo seoul256
+""colo seoul256-light
+set bg=dark
 if &term =~ '256color'
     " disable Background Color Erase (BCE) so that color schemes
     "   " render properly when inside 256-color tmux and GNU screen.
