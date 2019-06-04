@@ -70,7 +70,7 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 set scrolloff=5
 
 " highlight the cursor
-set cursorline
+" set cursorline
 
 " enable mouse rolling
 if has("mouse")
@@ -95,6 +95,12 @@ set colorcolumn=80
 set splitbelow
 set splitright
 
+" better splitting motion
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " more convenient macro-ing
 nnoremap <Space> @q
 
@@ -117,7 +123,7 @@ autocmd BufRead,BufNewFile * set formatoptions-=o
 call plug#begin('~/.vim/plugged')
 " call plug#begin('~/.local/share/nvim/plugged')
 
-" Plug 'vim-latex/vim-latex'
+Plug 'vim-latex/vim-latex'
 Plug 'junegunn/seoul256.vim'
 Plug 'jsit/disco.vim'
 Plug 'altercation/vim-colors-solarized'
@@ -155,24 +161,24 @@ call plug#end()
 " PLUGINs
 
 " vim-latex
-"" set shellslash
-"" set grepprg=grep\ -nH\ $*
-"" let g:tex_flavor='latex'
-"" let g:Tex_DefaultTargetFormat = 'pdf'
-"" let g:Tex_MultipleCompileFormats='pdf,bibtex,pdf'
-"" let g:Tex_ViewRule_pdf = 'evince'
-"" let g:tex_conceal = ""
-"" let g:Tex_GotoError=0
-"" let g:Tex_IgnoredWarnings =
-"" \'Underfull'."\n".
-"" \'Overfull'."\n".
-"" \'specifier changed to'."\n".
-"" \'You have requested'."\n".
-"" \'Missing number, treated as zero.'."\n".
-"" \'There were undefined references'."\n".
-"" \'Package lcg Warning:'."\n".
-"" \'Citation %.%# undefined'
-"" let g:Tex_IgnoreLevel = 8
+set shellslash
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_MultipleCompileFormats='pdf,bibtex,pdf'
+let g:Tex_ViewRule_pdf = 'evince'
+let g:tex_conceal = ""
+let g:Tex_GotoError=0
+let g:Tex_IgnoredWarnings =
+\'Underfull'."\n".
+\'Overfull'."\n".
+\'specifier changed to'."\n".
+\'You have requested'."\n".
+\'Missing number, treated as zero.'."\n".
+\'There were undefined references'."\n".
+\'Package lcg Warning:'."\n".
+\'Citation %.%# undefined'
+let g:Tex_IgnoreLevel = 8
 
 " theme
 let g:seoul256_background = 235 " ranging from 233 (darkest) to 239 (lightest)
@@ -216,7 +222,7 @@ noremap <F3> :Autoformat<CR>
 let g:formatter_yapf_style = 'pep8'
 
 " indent guides
-let g:indent_guides_enable_on_vim_startup = 1
+""let g:indent_guides_enable_on_vim_startup = 1
 
 " fzf
 
