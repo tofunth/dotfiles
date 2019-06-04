@@ -6,8 +6,9 @@ set nocompatible
 " turn on syntax highlighting
 syntax on
 
-" turn on line numbering
-set number
+" turn hybrid line numbers on
+set number relativenumber
+"":set nu rnu
 
 " hide buffer when switching, thus undo history is retained
 set hidden
