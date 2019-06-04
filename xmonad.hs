@@ -94,4 +94,7 @@ myKeys = [
     -- section control
     , ((mod4Mask .|. shiftMask, xK_q), confirmPrompt XP.defaultXPConfig "exit" $ io (exitWith ExitSuccess))
     , ((mod4Mask .|. shiftMask, xK_s), confirmPrompt XP.defaultXPConfig "suspend" $ spawn "systemctl suspend")
+    , ((mod4Mask .|. shiftMask, xK_b), confirmPrompt XP.defaultXPConfig "use only laptop screen" $ spawn "~/.screenlayout/only-laptop.sh")
+    , ((mod4Mask .|. shiftMask, xK_n), confirmPrompt XP.defaultXPConfig "use the additional screen setup 1" $ spawn "~/.screenlayout/home-two-screens.sh")
+    , ((mod4Mask .|. shiftMask, xK_m), confirmPrompt XP.defaultXPConfig "use the additional screen setup 2" $ spawn "~/.screenlayout/work-two-screens.sh")
     ]
