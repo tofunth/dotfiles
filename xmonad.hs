@@ -2,7 +2,7 @@ import XMonad
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.EZConfig(additionalKeys, removeKeys)
 -- HOW TO HOOK THIS!?
 import XMonad.Layout
 import XMonad.Layout.Tabbed
@@ -17,7 +17,11 @@ import XMonad.Layout.BinarySpacePartition
 import XMonad.Layout.Dwindle
 
 import System.IO
+import System.Exit
 import Graphics.X11.ExtraTypes.XF86
+import XMonad.Prompt.ConfirmPrompt
+import qualified XMonad.Prompt as XP
+
 
 myTabConfig = def { activeColor = "#556064"
                   , inactiveColor = "#2F3D44"
@@ -71,6 +75,9 @@ main = do
 --                        }
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
         } `additionalKeys` myKeys
+--         `removeKeys`
+--        [ (mod4Mask .|. shiftMask, xK_q)
+--        ]
 
 myKeys = [
     -- utilities
@@ -84,4 +91,7 @@ myKeys = [
     -- windows control
     , ((mod4Mask .|. shiftMask, xK_h), sendMessage MirrorShrink)
     , ((mod4Mask .|. shiftMask, xK_l), sendMessage MirrorExpand)
+    -- section control
+    , ((mod4Mask .|. shiftMask, xK_q), confirmPrompt XP.defaultXPConfig "exit" $ io (exitWith ExitSuccess))
+    , ((mod4Mask .|. shiftMask, xK_s), confirmPrompt XP.defaultXPConfig "suspend" $ spawn "systemctl suspend")
     ]
