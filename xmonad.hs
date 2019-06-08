@@ -34,11 +34,30 @@ myTabConfig = def { activeColor = "#556064"
                   , urgentTextColor = "#1ABC9C"
                   }
 
+myPP i = dynamicLogWithPP defaultPP
+           {ppTitle = xmobarColor "green" "" . shorten 50
+           , ppOutput  = hPutStrLn i
+}
+
 
 myManageHook = composeAll
     [ className =? "Gimp"      --> doFloat
     , className =? "Vncviewer" --> doFloat
     ]
+
+
+--xmobarEscape = concatMap doubleLts
+--  where doubleLts '<' = "<<"
+--        doubleLts x   = [x]
+--
+--myWorkspaces :: [String]
+--myWorkspaces = clickable . (map xmobarEscape) $ ["1","2","3","4","5","6","7","8","9"]
+--
+--  where
+--         clickable l = [ "<action=xdotool key alt+" ++ show (n) ++ ">" ++ ws ++ "</action>" |
+--                             (i,ws) <- zip [1..5] l,
+--                            let n = i ]
+
 myLayout = avoidStruts $
   tiled
   ||| Mirror tiled
@@ -68,11 +87,9 @@ main = do
         { manageHook = manageDocks <+> myManageHook -- make sure to include myManageHook definition from above
                         <+> manageHook defaultConfig
         , handleEventHook = handleEventHook def <+> docksEventHook
+--        , workspaces = myWorkspaces
         , layoutHook = myLayout
---        , logHook = dynamicLogWithPP xmobarPP
---                        { ppOutput = hPutStrLn xmproc
---                        , ppTitle = xmobarColor "green" "" . shorten 50
---                        }
+        , logHook = myPP xmproc
         , modMask = mod4Mask     -- Rebind Mod to the Windows key
         } `additionalKeys` myKeys
 --         `removeKeys`
