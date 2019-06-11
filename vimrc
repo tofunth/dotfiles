@@ -218,6 +218,13 @@ hi TabLine      ctermfg=Black  ctermbg=Brown cterm=NONE
 hi TabLineFill  ctermfg=Black  ctermbg=Brown cterm=NONE
 hi TabLineSel   ctermfg=White  ctermbg=DarkBlue  cterm=NONE
 
+" highlight active pane with column
+augroup BgHighlight
+    autocmd!
+    autocmd WinEnter * set colorcolumn=80
+    autocmd WinLeave * set colorcolumn=0
+augroup END
+
 " autoformat
 noremap <F3> :Autoformat<CR>
 let g:formatter_yapf_style = 'pep8'
