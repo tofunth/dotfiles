@@ -23,8 +23,8 @@ import XMonad.Prompt.ConfirmPrompt
 import qualified XMonad.Prompt as XP
 
 
-myTabConfig = def { activeColor = "#556064"
-                  , inactiveColor = "#2F3D44"
+myTabConfig = def { activeColor = "#2F3D44"
+                  , inactiveColor = "#556064"
                   , urgentColor = "#FDF6E3"
                   , activeBorderColor = "#454948"
                   , inactiveBorderColor = "#454948"
