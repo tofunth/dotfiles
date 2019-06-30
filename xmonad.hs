@@ -61,9 +61,9 @@ myManageHook = composeAll
 myLayout = avoidStruts $
   tiled
   ||| Mirror tiled
+  ||| twopane
   ||| noBorders (tabbed shrinkText myTabConfig)
-  ||| noBorders Full
---  ||| twopane
+--  ||| noBorders Full
 --  ||| Mirror twopane
 --  ||| emptyBSP
 --  ||| Spiral L XMonad.Layout.Dwindle.CW (3/2) (11/10) -- L means the non-main windows are put to the left.
