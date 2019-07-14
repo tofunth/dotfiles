@@ -305,3 +305,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 nnoremap <silent> <Leader>,rg :grep <C-R><C-W><CR>
 xnoremap <silent> <Leader>,rg :<C-W>grep <C-R><C-*><CR>
+
+" Cpp
+set tags=./tags;/
