@@ -97,6 +97,7 @@
 
 ;; Company
 (use-package company
+  :ensure t
   :bind
   (:map company-active-map
         ("RET" . nil)
@@ -112,6 +113,28 @@
   (company-minimum-prefix-length 1)
   (company-require-match nil)
   (company-tooltip-align-annotations t))
+
+;; C/C++
+(use-package cmake-ide
+  :ensure t
+  )
+
+(use-package rtags
+  :ensure t
+  :after cmake-ide
+  :config
+  (cmake-ide-setup))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; VERSION CONTROL
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package magit
+  :ensure t)
+
+(use-package evil-magit
+  :after magit
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UTILITIES
@@ -163,6 +186,10 @@
 (use-package treemacs-evil
   :ensure t)
 
+;; ripgrep
+(use-package rg
+  :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; KEY BINDING
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -178,12 +205,25 @@
   ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
   "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
   "SPC" '(helm-M-x :which-key "M-x")
-  ;; Files
+  ;; File Navigation
   "ff"  '(helm-find-files :which-key "find files")
-  ;; treemacs
   "ft"  '(treemacs :which-key "treemacs")
+  "fl"  '(helm-locate :which-key "locate file")
+  "pff" '(helm-projectile-find-file :which-key "projectile find file")
+  "pfd" '(helm-projectile-find-file-dwim :which-key "projectile find file at point")
   ;; Buffers
   "bb"  '(helm-buffers-list :which-key "buffers list")
+  ;; magit
+  "gg"  '(magit-status :which-key "magit")
+  "gb"  '(magit-blame :which-key "magit")
+  ;; ripgrep
+  "rr"  '(rg :which-key "rg")
+  "rp"  '(rg-project :which-key "rg project")
+  "rd"  '(rg-dwim :which-key "rg at point")
+  "rl"  '(rg-list-searches :which-key "rg searches list")
+  "rs"  '(rg-save-search :which-key "rg save search")
+  "rS"  '(rg-save-search-as-name :which-key "rg save search as name")
+  "rt"  '(rg-literal :which-key "rg non-regex")
   ;; Window
   "wl"  '(windmove-right :which-key "move right")
   "wh"  '(windmove-left :which-key "move left")
