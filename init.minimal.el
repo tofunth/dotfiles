@@ -125,6 +125,14 @@
   :config
   (cmake-ide-setup))
 
+;; jenkins/ groovy
+(use-package groovy-mode
+  :ensure t)
+
+;; docker
+(use-package dockerfile-mode
+  :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; VERSION CONTROL
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -147,6 +155,9 @@
   (setq helm-mode-fuzzy-match t)
   (setq helm-completion-in-region-fuzzy-match t)
   (setq helm-candidate-number-list 50))
+
+(use-package helm-ls-git
+  :ensure t)
 
 (use-package helm-projectile
   :ensure t
@@ -215,7 +226,8 @@
   "bb"  '(helm-buffers-list :which-key "buffers list")
   ;; magit
   "gg"  '(magit-status :which-key "magit")
-  "gb"  '(magit-blame :which-key "magit")
+  "gb"  '(magit-blame :which-key "magit blame")
+  "gs"  '(helm-grep-do-git-grep :which-key "git grep")
   ;; ripgrep
   "rr"  '(rg :which-key "rg")
   "rp"  '(rg-project :which-key "rg project")
