@@ -91,6 +91,10 @@
   :config
   (which-key-mode))
 
+;; Buffer move
+(use-package buffer-move
+  :ensure t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LANGUAGE-SUPPORTS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -224,6 +228,10 @@
   "pfd" '(helm-projectile-find-file-dwim :which-key "projectile find file at point")
   ;; Buffers
   "bb"  '(helm-buffers-list :which-key "buffers list")
+  "bl"  '(buf-move-right :which-key "move right")
+  "bh"  '(buf-move-left :which-key "move left")
+  "bk"  '(buf-move-up :which-key "move up")
+  "bj"  '(buf-move-down :which-key "move bottom")
   ;; magit
   "gg"  '(magit-status :which-key "magit")
   "gb"  '(magit-blame :which-key "magit blame")
@@ -237,10 +245,10 @@
   "rS"  '(rg-save-search-as-name :which-key "rg save search as name")
   "rt"  '(rg-literal :which-key "rg non-regex")
   ;; Window
-  "wl"  '(windmove-right :which-key "move right")
-  "wh"  '(windmove-left :which-key "move left")
-  "wk"  '(windmove-up :which-key "move up")
-  "wj"  '(windmove-down :which-key "move bottom")
+  "wl"  '(windmove-right :which-key "focus right")
+  "wh"  '(windmove-left :which-key "focus left")
+  "wk"  '(windmove-up :which-key "focus up")
+  "wj"  '(windmove-down :which-key "focus bottom")
   "w|"  '(split-window-right :which-key "split right")
   "w_"  '(split-window-below :which-key "split bottom")
   "wx"  '(delete-window :which-key "delete window")
