@@ -82,6 +82,15 @@
 
 (add-hook 'focus-out-hook #'garbage-collect)      ; Snappier
 
+(defun indent-buffer ()
+   "Indents an entire buffer using the default intenting scheme."
+  (interactive)
+  (point-to-register 'o)
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max))
+  (jump-to-register 'o))
+
 ;; Which Key
 (use-package which-key
   :ensure t
@@ -135,6 +144,10 @@
 
 ;; docker
 (use-package dockerfile-mode
+  :ensure t)
+
+;; docker
+(use-package bazel-mode
   :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -232,6 +245,7 @@
   "bh"  '(buf-move-left :which-key "move left")
   "bk"  '(buf-move-up :which-key "move up")
   "bj"  '(buf-move-down :which-key "move bottom")
+  "bf"  '(indent-buffer :which-key "format the whole buffer")
   ;; magit
   "gg"  '(magit-status :which-key "magit")
   "gb"  '(magit-blame :which-key "magit blame")
