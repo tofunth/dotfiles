@@ -258,14 +258,6 @@
   "rs"  '(rg-save-search :which-key "rg save search")
   "rS"  '(rg-save-search-as-name :which-key "rg save search as name")
   "rt"  '(rg-literal :which-key "rg non-regex")
-  ;; Window
-  "wl"  '(windmove-right :which-key "focus right")
-  "wh"  '(windmove-left :which-key "focus left")
-  "wk"  '(windmove-up :which-key "focus up")
-  "wj"  '(windmove-down :which-key "focus bottom")
-  "w|"  '(split-window-right :which-key "split right")
-  "w_"  '(split-window-below :which-key "split bottom")
-  "wx"  '(delete-window :which-key "delete window")
   ;; Others
   "at"  '(ansi-term :which-key "open terminal")
 ))
