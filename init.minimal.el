@@ -83,13 +83,31 @@
 (add-hook 'focus-out-hook #'garbage-collect)      ; Snappier
 
 (defun indent-buffer ()
-   "Indents an entire buffer using the default intenting scheme."
+  "Indents an entire buffer using the default intenting scheme."
   (interactive)
   (point-to-register 'o)
   (delete-trailing-whitespace)
   (indent-region (point-min) (point-max) nil)
   (untabify (point-min) (point-max))
   (jump-to-register 'o))
+
+(defun format-buffer ()
+  "Format the whole buffer"
+  (interactive)
+  (indent-buffer)
+  (delete-trailing-whitespace))
+
+;; Change text size globally
+(define-globalized-minor-mode
+  global-text-scale-mode
+  text-scale-mode
+  (lambda () (text-scale-mode 1)))
+
+(defun global-text-scale-adjust (inc) (interactive)
+       (text-scale-set 1)
+       (kill-local-variable 'text-scale-mode-amount)
+       (setq-default text-scale-mode-amount (+ text-scale-mode-amount inc))
+       (global-text-scale-mode 1))
 
 ;; Which Key
 (use-package which-key
@@ -225,42 +243,50 @@
 ;; Custom keybinding
 (use-package general
   :ensure t
-  :config (general-define-key
-  :states '(normal visual insert emacs)
-  :keymaps 'override
-  :prefix "SPC"
-  :non-normal-prefix "M-SPC"
-  ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
-  "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
-  "SPC" '(helm-M-x :which-key "M-x")
-  ;; File Navigation
-  "ff"  '(helm-find-files :which-key "find files")
-  "ft"  '(treemacs :which-key "treemacs")
-  "fl"  '(helm-locate :which-key "locate file")
-  "pff" '(helm-projectile-find-file :which-key "projectile find file")
-  "pfd" '(helm-projectile-find-file-dwim :which-key "projectile find file at point")
-  ;; Buffers
-  "bb"  '(helm-buffers-list :which-key "buffers list")
-  "bl"  '(buf-move-right :which-key "move right")
-  "bh"  '(buf-move-left :which-key "move left")
-  "bk"  '(buf-move-up :which-key "move up")
-  "bj"  '(buf-move-down :which-key "move bottom")
-  "bf"  '(indent-buffer :which-key "format the whole buffer")
-  ;; magit
-  "gg"  '(magit-status :which-key "magit")
-  "gb"  '(magit-blame :which-key "magit blame")
-  "gs"  '(helm-grep-do-git-grep :which-key "git grep")
-  ;; ripgrep
-  "rr"  '(rg :which-key "rg")
-  "rp"  '(rg-project :which-key "rg project")
-  "rd"  '(rg-dwim :which-key "rg at point")
-  "rl"  '(rg-list-searches :which-key "rg searches list")
-  "rs"  '(rg-save-search :which-key "rg save search")
-  "rS"  '(rg-save-search-as-name :which-key "rg save search as name")
-  "rt"  '(rg-literal :which-key "rg non-regex")
-  ;; Others
-  "at"  '(ansi-term :which-key "open terminal")
-))
+  :config
+  (general-define-key
+   :states '(normal visual insert emacs)
+   :keymaps 'override
+   :prefix "SPC"
+   :non-normal-prefix "M-SPC"
+   ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
+   "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
+   "SPC" '(helm-M-x :which-key "M-x")
+   ;; File Navigation
+   "ff"  '(helm-find-files :which-key "find files")
+   "ft"  '(treemacs :which-key "treemacs")
+   "fl"  '(helm-locate :which-key "locate file")
+   "pff" '(helm-projectile-find-file :which-key "projectile find file")
+   "pfd" '(helm-projectile-find-file-dwim :which-key "projectile find file at point")
+   ;; Buffers
+   "bb"  '(helm-buffers-list :which-key "buffers list")
+   "bl"  '(buf-move-right :which-key "move right")
+   "bh"  '(buf-move-left :which-key "move left")
+   "bk"  '(buf-move-up :which-key "move up")
+   "bj"  '(buf-move-down :which-key "move bottom")
+   "bf"  '(format-buffer :which-key "format the whole buffer")
+   ;; magit
+   "gg"  '(magit-status :which-key "magit")
+   "gb"  '(magit-blame :which-key "magit blame")
+   "gs"  '(helm-grep-do-git-grep :which-key "git grep")
+   ;; QoL
+   "x="  '((lambda () (interactive)
+             (global-text-scale-adjust (- text-scale-mode-amount))
+             (global-text-scale-mode -1)) :which-key "set default font size")
+   "x+"  '((lambda () (interactive) (global-text-scale-adjust 1))
+           :which-key "increase font size")
+   "x-"  '((lambda () (interactive) (global-text-scale-adjust -1))
+           :which-key "decrease font size")
+   ;; ripgrep
+   "rr"  '(rg :which-key "rg")
+   "rp"  '(rg-project :which-key "rg project")
+   "rd"  '(rg-dwim :which-key "rg at point")
+   "rl"  '(rg-list-searches :which-key "rg searches list")
+   "rs"  '(rg-save-search :which-key "rg save search")
+   "rS"  '(rg-save-search-as-name :which-key "rg save search as name")
+   "rt"  '(rg-literal :which-key "rg non-regex")
+   ;; Others
+   "at"  '(ansi-term :which-key "open terminal")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom in a seperate file
