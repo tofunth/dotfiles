@@ -25,6 +25,14 @@
   :config
   (evil-mode 1))
 
+(use-package evil-escape
+  :ensure t
+  :config
+  (setq-default evil-escape-key-sequence "jk")
+  (setq-default evil-escape-delay 0.2)
+  (evil-escape-mode 1)
+)
+
 (use-package evil-collection
   :after evil
   :ensure t
@@ -67,7 +75,9 @@
  tab-width 4                                      ; Set width for tabs
  uniquify-buffer-name-style 'forward              ; Uniquify buffer names
  window-combination-resize t                      ; Resize windows proportionally
- x-stretch-cursor t)                              ; Stretch cursor to the glyph width
+ x-stretch-cursor t                               ; Stretch cursor to the glyph width
+ pop-up-frames nil
+ shell-file-name "/bin/bash")
 (cd "~/")                                         ; Move to the user directory
 (delete-selection-mode 1)                         ; Replace region when inserting text
 (display-time-mode 1)                             ; Enable time in the mode-line
@@ -164,8 +174,20 @@
 (use-package dockerfile-mode
   :ensure t)
 
-;; docker
+;; bazel
 (use-package bazel-mode
+  :ensure t)
+
+;; markdown
+(use-package markdown-mode
+  :ensure t)
+
+;; markdown
+(use-package terraform-mode
+  :ensure t)
+
+;; yaml
+(use-package yaml-mode
   :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -213,8 +235,8 @@
    projectile-cache-file (expand-file-name ".projectile-cache" user-emacs-directory)
    projectile-known-projects-file (expand-file-name ".projectile-bookmarks" user-emacs-directory))
   :custom
-  (projectile-completion-system 'helm)
-  (projectile-enable-caching t))
+  (setq projectile-completion-system 'helm)
+  (setq projectile-enable-caching t))
 
 ;; Highlight whitespaces
 (use-package whitespace
@@ -235,6 +257,33 @@
 ;; ripgrep
 (use-package rg
   :ensure t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; LATEX STUFFS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; auctex
+(use-package tex-site
+  :ensure auctex
+  :defer t
+  :after (tex latex)
+  :config
+  (setq TeX-parse-self t))
+
+(use-package reftex
+  :ensure t
+  :config
+  (setq reftex-plug-into-AUCTeX t))
+
+
+(use-package helm-bibtex
+  :ensure t
+  :config
+  (setq helm-bibtex-bibliography
+        '("~/hieustuffs/masterthesis/write/bibs/masterthesis.bib"))
+  (setq helm-bibtex-library-path
+        '("~/hieustuffs/bibtex/pdfs"
+          "~/hieustuffs/bibtex/papers")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; KEY BINDING
@@ -268,14 +317,18 @@
    ;; magit
    "gg"  '(magit-status :which-key "magit")
    "gb"  '(magit-blame :which-key "magit blame")
+   "gf" '(helm-ls-git-ls :which-key "git find file")
    "gs"  '(helm-grep-do-git-grep :which-key "git grep")
+   ;; latex
+   "lca"  '(TeX-command-run-all :which-key "tex compile all")
+   "lbt"  '(helm-bibtex :which-key "helm bibtex")
    ;; QoL
-   "x="  '((lambda () (interactive)
+   "w="  '((lambda () (interactive)
              (global-text-scale-adjust (- text-scale-mode-amount))
              (global-text-scale-mode -1)) :which-key "set default font size")
-   "x+"  '((lambda () (interactive) (global-text-scale-adjust 1))
+   "w+"  '((lambda () (interactive) (global-text-scale-adjust 1))
            :which-key "increase font size")
-   "x-"  '((lambda () (interactive) (global-text-scale-adjust -1))
+   "w-"  '((lambda () (interactive) (global-text-scale-adjust -1))
            :which-key "decrease font size")
    ;; ripgrep
    "rr"  '(rg :which-key "rg")
