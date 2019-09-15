@@ -157,7 +157,6 @@ Plug 'w0rp/ale' " async lint
 " Plug 'xolox/vim-misc'
 " Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
 " Initialize plugin system
