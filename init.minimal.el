@@ -190,6 +190,15 @@
 (use-package yaml-mode
   :ensure t)
 
+;; python
+(use-package elpy
+  :ensure t)
+
+;; syntax check
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; VERSION CONTROL
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
