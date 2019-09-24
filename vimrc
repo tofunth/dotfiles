@@ -198,7 +198,7 @@ if &term =~ '256color'
 endif
 
 " set background
-" set background=light
+set background=light
 
 " NERDTree-related shortcuts
 nnoremap <silent> <Leader>nn :NERDTreeToggle<CR>
