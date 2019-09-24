@@ -22,8 +22,9 @@
   (setq evil-want-keybinding nil)
   (setq x-select-enable-clipboard nil)
   (setq save-interprogram-paste-before-kill nil)  ; stop dd from adding to clipboard
-  :config
-  (evil-mode 1))
+;;  :config
+;;  (evil-mode 1)
+)
 
 (use-package evil-escape
   :ensure t
@@ -148,6 +149,8 @@
         ("<right>" . company-complete-common))
   :hook
   (after-init . global-company-mode)
+  :config
+  (define-key company-active-map (kbd "C-w") 'evil-delete-backward-word)
   :custom
   (company-dabbrev-downcase nil)
   (company-idle-delay .2)
@@ -204,7 +207,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package magit
-  :ensure t)
+  :ensure t
+  :config
+  (global-set-key (kbd "C-c g s") 'magit-status)
+)
 
 (use-package evil-magit
   :after magit
@@ -220,7 +226,13 @@
   :init
   (setq helm-mode-fuzzy-match t)
   (setq helm-completion-in-region-fuzzy-match t)
-  (setq helm-candidate-number-list 50))
+  (setq helm-candidate-number-list 50)
+  :config
+  (global-set-key (kbd "M-x") #'helm-M-x)
+  (global-set-key (kbd "C-x C-f") #'helm-find-files)
+  (global-set-key (kbd "C-x b") #'helm-buffers-list)
+  (global-set-key (kbd "C-c g f") #'helm-ls-git-ls)
+  (define-key helm-map (kbd "C-w") 'evil-delete-backward-word))
 
 (use-package helm-ls-git
   :ensure t)
@@ -349,6 +361,17 @@
    "rt"  '(rg-literal :which-key "rg non-regex")
    ;; Others
    "at"  '(ansi-term :which-key "open terminal")))
+
+;; QoL
+(global-set-key (kbd "C-c w =") '(lambda () (interactive)
+             (global-text-scale-adjust (- text-scale-mode-amount))
+             (global-text-scale-mode -1)))
+
+(global-set-key (kbd "C-c w +")
+             '(lambda () (interactive) (global-text-scale-adjust 1)))
+
+(global-set-key (kbd "C-c w -")
+             '(lambda () (interactive) (global-text-scale-adjust -1)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom in a seperate file
