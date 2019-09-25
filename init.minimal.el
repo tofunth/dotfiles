@@ -67,6 +67,8 @@
 
 (add-hook 'focus-out-hook #'garbage-collect)      ; Snappier
 
+(add-hook 'before-save-hook 'delete-trailing-whitespace) ; Automatically delete trailing whitespaces
+
 (defun indent-buffer ()
   "Indents an entire buffer using the default intenting scheme."
   (interactive)
