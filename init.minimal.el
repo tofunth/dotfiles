@@ -14,32 +14,6 @@
   (package-install 'use-package))
 (require 'use-package)
 
-;; Vim mode
-(use-package evil
-  :ensure t
-  :init
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-keybinding nil)
-  (setq x-select-enable-clipboard nil)
-  (setq save-interprogram-paste-before-kill nil)  ; stop dd from adding to clipboard
-;;  :config
-;;  (evil-mode 1)
-)
-
-(use-package evil-escape
-  :ensure t
-  :config
-  (setq-default evil-escape-key-sequence "jk")
-  (setq-default evil-escape-delay 0.2)
-  (evil-escape-mode 1)
-)
-
-(use-package evil-collection
-  :after evil
-  :ensure t
-  :config
-  (evil-collection-init))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Better defaults
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -149,8 +123,6 @@
         ("<right>" . company-complete-common))
   :hook
   (after-init . global-company-mode)
-  :config
-  (define-key company-active-map (kbd "C-w") 'evil-delete-backward-word)
   :custom
   (company-dabbrev-downcase nil)
   (company-idle-delay .2)
@@ -208,13 +180,7 @@
 
 (use-package magit
   :ensure t
-  :config
-  (global-set-key (kbd "C-c g s") 'magit-status)
 )
-
-(use-package evil-magit
-  :after magit
-  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; UTILITIES
@@ -227,12 +193,7 @@
   (setq helm-mode-fuzzy-match t)
   (setq helm-completion-in-region-fuzzy-match t)
   (setq helm-candidate-number-list 50)
-  :config
-  (global-set-key (kbd "M-x") #'helm-M-x)
-  (global-set-key (kbd "C-x C-f") #'helm-find-files)
-  (global-set-key (kbd "C-x b") #'helm-buffers-list)
-  (global-set-key (kbd "C-c g f") #'helm-ls-git-ls)
-  (define-key helm-map (kbd "C-w") 'evil-delete-backward-word))
+)
 
 (use-package helm-ls-git
   :ensure t)
@@ -270,9 +231,6 @@
 
 ;; treemacs
 (use-package treemacs
-  :ensure t)
-
-(use-package treemacs-evil
   :ensure t)
 
 ;; ripgrep
@@ -362,6 +320,25 @@
    ;; Others
    "at"  '(ansi-term :which-key "open terminal")))
 
+;; override default keybindings
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+
+;; magit
+(global-set-key (kbd "C-c g g") 'magit-status)
+(global-set-key (kbd "C-c g b") 'magit-blame)
+(global-set-key (kbd "C-c g f") 'helm-ls-git-ls)
+(global-set-key (kbd "C-c g s") 'helm-grep-do-git-grep)
+
+;; ripgrep
+(global-set-key (kbd "C-c r r") 'rg)
+(global-set-key (kbd "C-c r d") 'rg-dwim)
+
+;; file navigation
+(global-set-key (kbd "C-c f t") 'treemacs)
+(global-set-key (kbd "C-c f l") 'helm-locate)
+
 ;; QoL
 (global-set-key (kbd "C-c w =") '(lambda () (interactive)
              (global-text-scale-adjust (- text-scale-mode-amount))
@@ -371,7 +348,12 @@
              '(lambda () (interactive) (global-text-scale-adjust 1)))
 
 (global-set-key (kbd "C-c w -")
-             '(lambda () (interactive) (global-text-scale-adjust -1)))
+                '(lambda () (interactive) (global-text-scale-adjust -1)))
+
+(define-key global-map (kbd "C-<up>") 'windmove-up)
+(define-key global-map (kbd "C-<down>") 'windmove-down)
+(define-key global-map (kbd "C-<left>") 'windmove-left)
+(define-key global-map (kbd "C-<right>") 'windmove-right)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom in a seperate file
