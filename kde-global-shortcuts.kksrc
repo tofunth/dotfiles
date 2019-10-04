@@ -6,12 +6,6 @@ Disable Touchpad=Touchpad Off
 Enable Touchpad=Touchpad On
 Switch to Next Keyboard Layout=none
 Toggle Touchpad=Touchpad Toggle
-{759f1a29-b37f-42a6-8448-373d7be6ce85}=none
-{b81c9025-66d6-4a5f-bb9f-420e2a580b9e}=none
-{d03619b6-9b3c-48cc-9d9c-a2aadb485550}=none
-{e59bca8e-9b8d-4967-8862-2f0138e41c1f}=none
-{e8a1af60-14b2-4c1f-b47a-2b282aa74934}=none
-{fda49ea7-5a11-433e-bbff-e9409be69c5a}=Ctrl+Alt+T
 
 [kded5][Global Shortcuts]
 Decrease Keyboard Brightness=Keyboard Brightness Down
@@ -61,7 +55,7 @@ MoveZoomRight=none
 MoveZoomUp=none
 Remove Window From Group=none
 Setup Window Shortcut=none
-Show Desktop=none
+Show Desktop=Meta+A
 ShowDesktopGrid=Meta+W
 Suspend Compositing=Alt+Shift+F12
 Switch One Desktop Down=Ctrl+Alt+Down
@@ -190,6 +184,7 @@ Window to Screen 7=none
 view_actual_size=none
 view_zoom_in=Meta+=
 view_zoom_out=Meta+-
+{fda49ea7-5a11-433e-bbff-e9409be69c5a}=Ctrl+Alt+T; Meta+Return
 
 [mediacontrol][Global Shortcuts]
 nextmedia=Media Next
