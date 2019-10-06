@@ -19,6 +19,14 @@ Sleep=Sleep
 Toggle Keyboard Backlight=Keyboard Light On/Off
 display=Display; Meta+P
 
+[khotkeys][Global Shortcuts]
+{759f1a29-b37f-42a6-8448-373d7be6ce85}=none
+{b81c9025-66d6-4a5f-bb9f-420e2a580b9e}=none
+{d03619b6-9b3c-48cc-9d9c-a2aadb485550}=none
+{e59bca8e-9b8d-4967-8862-2f0138e41c1f}=none
+{e8a1af60-14b2-4c1f-b47a-2b282aa74934}=none
+{fda49ea7-5a11-433e-bbff-e9409be69c5a}=Ctrl+Alt+T; Meta+Return
+
 [kmix][Global Shortcuts]
 decrease_microphone_volume=Microphone Volume Down
 decrease_volume=Volume Down
@@ -55,7 +63,7 @@ MoveZoomRight=none
 MoveZoomUp=none
 Remove Window From Group=none
 Setup Window Shortcut=none
-Show Desktop=Meta+A
+Show Desktop=Meta+E
 ShowDesktopGrid=Meta+W
 Suspend Compositing=Alt+Shift+F12
 Switch One Desktop Down=Ctrl+Alt+Down
@@ -124,7 +132,7 @@ Window Maximize=Meta+M
 Window Maximize Horizontal=none
 Window Maximize Vertical=none
 Window Minimize=Meta+N
-Window Move=none
+Window Move=Meta+Shift+Space
 Window No Border=none
 Window On All Desktops=none
 Window One Desktop Down=Ctrl+Alt+Shift+Down
@@ -145,7 +153,7 @@ Window Quick Tile Top=Meta+Up
 Window Quick Tile Top Left=Meta+PgUp
 Window Quick Tile Top Right=Meta+PgDown
 Window Raise=none
-Window Resize=none
+Window Resize=Meta+R
 Window Shade=none
 Window Shrink Horizontal=none
 Window Shrink Vertical=none
@@ -184,12 +192,6 @@ Window to Screen 7=none
 view_actual_size=none
 view_zoom_in=Meta+=
 view_zoom_out=Meta+-
-{759f1a29-b37f-42a6-8448-373d7be6ce85}=none
-{b81c9025-66d6-4a5f-bb9f-420e2a580b9e}=none
-{d03619b6-9b3c-48cc-9d9c-a2aadb485550}=none
-{e59bca8e-9b8d-4967-8862-2f0138e41c1f}=none
-{e8a1af60-14b2-4c1f-b47a-2b282aa74934}=none
-{fda49ea7-5a11-433e-bbff-e9409be69c5a}=Ctrl+Alt+T; Meta+Return
 
 [mediacontrol][Global Shortcuts]
 nextmedia=Media Next
@@ -198,7 +200,7 @@ previousmedia=Media Previous
 stopmedia=Media Stop
 
 [plasmashell][Global Shortcuts]
-activate widget 108=none
+activate widget 197=none
 activate widget 22=Alt+M
 clear-history=none
 clipboard_action=Ctrl+Alt+X
