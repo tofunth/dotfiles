@@ -1,6 +1,11 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; CORE BOOTSTRAP
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Make startup faster by reducing the frequency of garbage
+;; collection.  The default is 800 kilobytes.  Measured in bytes.
+(setq gc-cons-threshold (* 50 1000 1000))
+
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
@@ -98,6 +103,7 @@
 
 ;; Which Key
 (use-package which-key
+  :defer 1
   :ensure t
   :init
   (setq which-key-separator " ")
@@ -115,6 +121,7 @@
 
 ;; Company
 (use-package company
+  :defer 2
   :ensure t
   :bind
   (:map company-active-map
@@ -134,10 +141,12 @@
 
 ;; C/C++
 (use-package cmake-ide
+  :defer 2
   :ensure t
   )
 
 (use-package rtags
+  :defer 2
   :ensure t
   :after cmake-ide
   :config
@@ -145,34 +154,42 @@
 
 ;; jenkins/ groovy
 (use-package groovy-mode
+  :defer 1
   :ensure t)
 
 ;; docker
 (use-package dockerfile-mode
+  :defer 1
   :ensure t)
 
 ;; bazel
 (use-package bazel-mode
+  :defer 1
   :ensure t)
 
 ;; markdown
 (use-package markdown-mode
+  :defer 1
   :ensure t)
 
 ;; markdown
 (use-package terraform-mode
+  :defer 1
   :ensure t)
 
 ;; yaml
 (use-package yaml-mode
+  :defer 1
   :ensure t)
 
 ;; python
 (use-package elpy
+  :defer 2
   :ensure t)
 
 ;; syntax check
 (use-package flycheck
+  :defer 1
   :ensure t
   :init (global-flycheck-mode))
 
@@ -181,6 +198,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package magit
+  :defer 2
   :ensure t
 )
 
@@ -198,9 +216,11 @@
 )
 
 (use-package helm-ls-git
+  :defer 2
   :ensure t)
 
 (use-package helm-projectile
+  :defer 2
   :ensure t
   :defer nil
   :bind
@@ -211,6 +231,7 @@
   (helm-projectile-toggle 1))
 
 (use-package projectile
+  :defer 2
   :ensure t
   :hook
   (after-init . projectile-global-mode)
@@ -233,10 +254,12 @@
 
 ;; treemacs
 (use-package treemacs
+  :defer 1
   :ensure t)
 
 ;; ripgrep
 (use-package rg
+  :defer 1
   :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -245,6 +268,7 @@
 
 ;; auctex
 (use-package tex-site
+  :defer 1
   :ensure auctex
   :defer t
   :after (tex latex)
@@ -252,12 +276,14 @@
   (setq TeX-parse-self t))
 
 (use-package reftex
+  :defer 2
   :ensure t
   :config
   (setq reftex-plug-into-AUCTeX t))
 
 
 (use-package helm-bibtex
+  :defer 2
   :ensure t
   :config
   (setq helm-bibtex-bibliography
@@ -356,6 +382,10 @@
 (define-key global-map (kbd "C-<down>") 'windmove-down)
 (define-key global-map (kbd "C-<left>") 'windmove-left)
 (define-key global-map (kbd "C-<right>") 'windmove-right)
+
+;; Make startup faster by reducing the frequency of garbage
+;; collection.  The default is 800 kilobytes.  Measured in bytes.
+(setq gc-cons-threshold (* 50 1000 1000))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom in a seperate file
