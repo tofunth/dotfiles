@@ -7,7 +7,7 @@ set nocompatible
 syntax on
 
 " turn hybrid line numbers on
-set number relativenumber
+"set number
 "":set nu rnu
 
 " hide buffer when switching, thus undo history is retained
@@ -102,10 +102,6 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" map jj to Esc
-imap jk <Esc>
-
-
 " more convenient macro-ing
 nnoremap <Space> @q
 
@@ -150,7 +146,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'Konfekt/FastFold'
+" Plug 'Konfekt/FastFold'
 " Plug 'python-mode/python-mode', {'branch': 'develop'} " better python support than builtin one
 Plug 'w0rp/ale' " async lint
 " Plug 'xolox/vim-session'
