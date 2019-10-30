@@ -75,11 +75,14 @@ set scrolloff=5
 
 " enable mouse rolling
 if has("mouse")
-    set mouse=v
+    set mouse=a
 endif
 
 " switch paste mode
 set pastetoggle=<F2>
+
+let mapleader      = ' '
+let maplocalleader = ' '
 
 " indentation
 set expandtab " force to use spaces for indentation
@@ -103,7 +106,21 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " more convenient macro-ing
-nnoremap <Space> @q
+nnoremap Q @q
+
+" Quickfix stuffs
+nnoremap ]q :cnext<CR>zz
+nnoremap [q :cprev<CR>zz
+nnoremap ]l :lnext<CR>zz
+nnoremap [l :lprev<CR>zz
+
+" Buffer stuffs
+nnoremap ]b :bnext<cr>
+nnoremap [b :bprev<cr>
+
+" Circular stuffs
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
 
 " set GUI vim tab label: tab number + filename + sign
 set guitablabel=\[%N\]\ %t\ %M 
@@ -126,8 +143,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'vim-latex/vim-latex'
 Plug 'junegunn/seoul256.vim'
-Plug 'jsit/disco.vim'
-Plug 'altercation/vim-colors-solarized'
+Plug 'plan9-for-vimspace/acme-colors'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/nerdtree'
@@ -183,9 +199,10 @@ let g:Tex_IgnoreLevel = 8
 " theme
 let g:seoul256_background = 235 " ranging from 233 (darkest) to 239 (lightest)
 let g:seoul256_light_background = 253 " ranging from 252 to 256
-""colo seoul256
 ""colo seoul256-light
-set bg=dark
+"colo seoul256
+"set bg=dark
+"colo acme
 if &term =~ '256color'
     " disable Background Color Erase (BCE) so that color schemes
     "   " render properly when inside 256-color tmux and GNU screen.
@@ -269,10 +286,6 @@ function! s:find_git_root()
 endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()
-
-" Quickfix stuffs
-nnoremap <F4> :cprev<CR>
-nnoremap <F5> :cnext<CR>
 
 " Python-mode
 "" let g:pymode_rope = 0
