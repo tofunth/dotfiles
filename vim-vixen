@@ -1,0 +1,34 @@
+{
+  "keymaps": {
+    "0": { "type": "scroll.home" },
+    ":": { "type": "command.show" },
+    "k": { "type": "scroll.vertically", "count": -1 },
+    "j": { "type": "scroll.vertically", "count": 1 },
+    "h": { "type": "scroll.horizonally", "count": -1 },
+    "l": { "type": "scroll.horizonally", "count": 1 },
+    "gg": { "type": "scroll.top" },
+    "G": { "type": "scroll.bottom" },
+    "$": { "type": "scroll.end" },
+    "f": { "type": "follow.start", "newTab": false },
+    "F": { "type": "follow.start", "newTab": true, "background": false },
+    "<S-Esc>": { "type": "addon.toggle.enabled" }
+  },
+  "search": {
+    "default": "google",
+    "engines": {
+      "google": "https://google.com/search?q={}",
+      "yahoo": "https://search.yahoo.com/search?p={}",
+      "bing": "https://www.bing.com/search?q={}",
+      "duckduckgo": "https://duckduckgo.com/?q={}",
+      "twitter": "https://twitter.com/search?q={}",
+      "wikipedia": "https://en.wikipedia.org/w/index.php?search={}"
+    }
+  },
+  "properties": {
+    "hintchars": "abcdefghijklmnopqrstuvwxyz",
+    "smoothscroll": false,
+    "complete": "sbh"
+  },
+  "blacklist": [
+  ]
+}
