@@ -3,6 +3,9 @@
 " not compatible with vi
 set nocompatible
 
+let mapleader      = ' '
+let maplocalleader = ' '
+
 " turn on syntax highlighting
 syntax on
 
@@ -81,8 +84,16 @@ endif
 " switch paste mode
 set pastetoggle=<F2>
 
-let mapleader      = ' '
-let maplocalleader = ' '
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
+
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
 
 " indentation
 set expandtab " force to use spaces for indentation
@@ -94,16 +105,23 @@ set softtabstop=4 " see multiple spaces as tabstops
 
 " color column
 set colorcolumn=80
+highlight ColorColumn ctermbg=Gray
+highlight ColorColumn guibg=Gray
 
 " more natural splitting
 set splitbelow
 set splitright
 
 " better splitting motion
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+nnoremap <C-h> <C-W>h
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-l> <C-W>l
+
+nnoremap <C-Left> <C-W>h
+nnoremap <C-Down> <C-W>j
+nnoremap <C-Up> <C-W>k
+nnoremap <C-Right> <C-W>l
 
 " more convenient macro-ing
 nnoremap Q @q
@@ -134,6 +152,12 @@ endif
 " continue in commenting
 autocmd BufRead,BufNewFile * set formatoptions-=o
 
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+set statusline=\ %{HasPaste()}%f\ Line:\ %l\ \ Column:\ %c
+
 " PLUGIN MANAGER
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -141,7 +165,7 @@ autocmd BufRead,BufNewFile * set formatoptions-=o
 call plug#begin('~/.vim/plugged')
 " call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'vim-latex/vim-latex'
+"Plug 'vim-latex/vim-latex'
 Plug 'junegunn/seoul256.vim'
 Plug 'plan9-for-vimspace/acme-colors'
 Plug 'godlygeek/tabular'
