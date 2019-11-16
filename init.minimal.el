@@ -20,14 +20,33 @@
 (require 'use-package)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Better defaults
+;; Theme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package material-theme
+  :ensure t
+  :disabled
+  )
+
+(if (display-graphic-p)
+  (load-theme 'material t)
+  )
+
+(use-package rainbow-delimiters
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Better defaults
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (when window-system
   (scroll-bar-mode 0)                             ; Disable the scroll bar
   (tool-bar-mode 0)                               ; Disable the tool bar
-  (tooltip-mode 0))                               ; Disable the tooltips
+  (tooltip-mode 0)                                ; Disable the tooltips
+)
 
 (setq-default
  ad-redefinition-action 'accept                   ; Silence warnings for redefinition
@@ -378,6 +397,18 @@
 (global-set-key (kbd "C-c w -")
                 '(lambda () (interactive) (global-text-scale-adjust -1)))
 
+;; coding
+(global-set-key (kbd "C-c c m") 'match-paren)
+(global-set-key (kbd "C-c c c") 'comment-or-uncomment-region)
+
+(defun match-paren (arg)
+  "Go to the matching paren if on a paren; otherwise insert %."
+  (interactive "p")
+  (cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
+        ((looking-at "\\s)") (forward-char 1) (backward-list 1))
+        (t (self-insert-command (or arg 1)))))
+
+;; windows
 (define-key global-map (kbd "C-<up>") 'windmove-up)
 (define-key global-map (kbd "C-<down>") 'windmove-down)
 (define-key global-map (kbd "C-<left>") 'windmove-left)
