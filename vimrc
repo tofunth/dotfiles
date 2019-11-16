@@ -136,10 +136,6 @@ nnoremap [l :lprev<CR>zz
 nnoremap ]b :bnext<cr>
 nnoremap [b :bprev<cr>
 
-" Circular stuffs
-nnoremap <tab>   <c-w>w
-nnoremap <S-tab> <c-w>W
-
 " set GUI vim tab label: tab number + filename + sign
 set guitablabel=\[%N\]\ %t\ %M 
 
