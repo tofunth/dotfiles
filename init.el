@@ -414,6 +414,17 @@
 (define-key global-map (kbd "C-<left>") 'windmove-left)
 (define-key global-map (kbd "C-<right>") 'windmove-right)
 
+(define-key global-map (kbd "C-S-<up>") 'buf-move-up)
+(define-key global-map (kbd "C-S-<down>") 'buf-move-down)
+(define-key global-map (kbd "C-S-<left>") 'buf-move-left)
+(define-key global-map (kbd "C-S-<right>") 'buf-move-right)
+
+(add-hook 'org-mode-hook '(lambda ()
+   (local-set-key [C-S-up]    'buf-move-up)
+   (local-set-key [C-S-down]  'buf-move-down)
+   (local-set-key [C-S-left]  'buf-move-left)
+   (local-set-key [C-S-right] 'buf-move-right)))
+
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection.  The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
