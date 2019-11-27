@@ -28,6 +28,13 @@ set autoread
 set encoding=utf-8
 set fileencoding=utf-8
 
+" Trailing white space
+highlight ExtraWhitespace ctermbg=red guibg=red
+au ColorScheme * highlight ExtraWhitespace guibg=red
+au BufEnter * match ExtraWhitespace /\s\+$\|\t/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$\|\t/
+au InsertLeave * match ExtraWhiteSpace /\s\+$\|\t/
+
 " greatly enhance search
 runtime macros/matchit.vim
 
@@ -183,8 +190,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " Plug 'Konfekt/FastFold'
-" Plug 'python-mode/python-mode', {'branch': 'develop'} " better python support than builtin one
+Plug 'python-mode/python-mode', {'branch': 'develop'} " better python support than builtin one
 Plug 'w0rp/ale' " async lint
+Plug 'vim-scripts/bash-support.vim'
 " Plug 'xolox/vim-session'
 " Plug 'xolox/vim-misc'
 " Plug 'SirVer/ultisnips'
@@ -308,8 +316,8 @@ endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
 " Python-mode
-"" let g:pymode_rope = 0
-"" let g:pymode_lint_on_write = 0
+let g:pymode_rope = 0
+let g:pymode_lint_on_write = 0
 
 " Async Lint Engine
 let g:ale_enabled = 0 " disable ALE by default
@@ -337,6 +345,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 nnoremap <silent> <Leader>,rg :grep <C-R><C-W><CR>
 xnoremap <silent> <Leader>,rg :<C-W>grep <C-R><C-*><CR>
+
+" Bash support
+let g:BASH_MapLeader  = '\'
 
 " Cpp
 set tags=./tags;/
