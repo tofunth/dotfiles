@@ -28,7 +28,7 @@ set autoread
 set encoding=utf-8
 set fileencoding=utf-8
 
-" Trailing white space
+" white space
 highlight ExtraWhitespace ctermbg=red guibg=red
 au ColorScheme * highlight ExtraWhitespace guibg=red
 au BufEnter * match ExtraWhitespace /\s\+$\|\t/
@@ -88,16 +88,13 @@ if has("mouse")
     set mouse=a
 endif
 
-" switch paste mode
-set pastetoggle=<F2>
-
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
 " Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
-        return 'PASTE MODE  '
+        return '[PASTE] '
     endif
     return ''
 endfunction
@@ -114,6 +111,9 @@ set softtabstop=4 " see multiple spaces as tabstops
 set colorcolumn=80
 highlight ColorColumn ctermbg=Gray
 highlight ColorColumn guibg=Gray
+
+" status line color
+highlight StatusLine cterm=bold ctermfg=white ctermbg=darkcyan
 
 " more natural splitting
 set splitbelow
@@ -134,17 +134,17 @@ nnoremap <C-Right> <C-W>l
 nnoremap Q @q
 
 " Quickfix stuffs
-nnoremap ]q :cnext<CR>zz
-nnoremap [q :cprev<CR>zz
-nnoremap ]l :lnext<CR>zz
-nnoremap [l :lprev<CR>zz
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprev<CR>
+nnoremap ]l :lnext<CR>
+nnoremap [l :lprev<CR>
 
 " Buffer stuffs
-nnoremap ]b :bnext<cr>
-nnoremap [b :bprev<cr>
+nnoremap ]b :bnext<CR>
+nnoremap [b :bprev<CR>
 
 " set GUI vim tab label: tab number + filename + sign
-set guitablabel=\[%N\]\ %t\ %M 
+set guitablabel=\[%N\]\ %t\ %M
 
 " set GUI font
 if has('gui_running')
@@ -159,7 +159,17 @@ autocmd BufRead,BufNewFile * set formatoptions-=o
 set laststatus=2
 
 " Format the status line
-set statusline=\ %{HasPaste()}%f\ Line:\ %l\ \ Column:\ %c
+set statusline=%{HasPaste()}                    "paste-mode
+set statusline+=%t                              "tail
+set statusline+=%m                              "modified
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}]                         "file format
+set statusline+=%h                              "help file flag
+set statusline+=%r                              "read only flag
+set statusline+=%y                              "filetype
+set statusline+=%=                              "left/right separator
+set statusline+=%l:%c                         "line:column
+set statusline+=\ (%P)                          "percentage
 
 " PLUGIN MANAGER
 " Specify a directory for plugins
@@ -169,8 +179,6 @@ call plug#begin('~/.vim/plugged')
 " call plug#begin('~/.local/share/nvim/plugged')
 
 "Plug 'vim-latex/vim-latex'
-Plug 'junegunn/seoul256.vim'
-Plug 'plan9-for-vimspace/acme-colors'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'scrooloose/nerdtree'
@@ -224,22 +232,12 @@ let g:Tex_IgnoredWarnings =
 \'Citation %.%# undefined'
 let g:Tex_IgnoreLevel = 8
 
-" theme
-let g:seoul256_background = 235 " ranging from 233 (darkest) to 239 (lightest)
-let g:seoul256_light_background = 253 " ranging from 252 to 256
-""colo seoul256-light
-"colo seoul256
-"set bg=dark
-"colo acme
 if &term =~ '256color'
     " disable Background Color Erase (BCE) so that color schemes
     "   " render properly when inside 256-color tmux and GNU screen.
     "     " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
     set t_ut=
 endif
-
-" set background
-set background=light
 
 " NERDTree-related shortcuts
 nnoremap <silent> <Leader>nn :NERDTreeToggle<CR>
