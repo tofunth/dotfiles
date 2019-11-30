@@ -149,6 +149,7 @@ highligh Visual ctermfg=red ctermbg=green
 highligh Search ctermfg=red ctermbg=lightyellow
 highlight StatusLine ctermfg=black ctermbg=darkcyan
 highlight ColorColumn ctermfg=red ctermbg=yellow
+highlight CursorLine cterm=NONE ctermfg=None ctermbg=brown
 
 " Highlight trailing whitespaces and starting tabs
 highlight ExtraWhitespace ctermbg=lightblue
