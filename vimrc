@@ -80,7 +80,7 @@ let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 set scrolloff=5
 
 " highlight the cursor
-set cursorline
+"set cursorline
 
 " Returns true if paste mode is enabled
 function! HasPaste()
@@ -149,7 +149,7 @@ highligh Visual ctermfg=red ctermbg=green
 highligh Search ctermfg=red ctermbg=lightyellow
 highlight StatusLine ctermfg=black ctermbg=darkcyan
 highlight ColorColumn ctermfg=red ctermbg=yellow
-highlight CursorLine cterm=NONE ctermfg=None ctermbg=brown
+highlight CursorLine cterm=NONE ctermfg=None ctermbg=darkred
 
 " Highlight trailing whitespaces and starting tabs
 highlight ExtraWhitespace ctermbg=lightblue
