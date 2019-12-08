@@ -177,7 +177,7 @@ augroup END
 call plug#begin('~/.vim/plugged')
 " call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'majutsushi/tagbar'
 Plug 'mkitt/tabline.vim'
 Plug 'Chiel92/vim-autoformat'
@@ -188,9 +188,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale' " async lint
 
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-Plug 'pangloss/vim-javascript'
-Plug 'leshill/vim-json'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'leshill/vim-json', { 'for': 'json' }
 Plug 'tpope/vim-surround' " allow easy editing surrounding tags
 Plug 'tpope/vim-fugitive' " integrate Git
 Plug 'tpope/vim-eunuch' " Some useful shell commands
@@ -199,7 +199,7 @@ Plug 'othree/javascript-libraries-syntax.vim' " syntax libraris for different js
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'nathanaelkane/vim-indent-guides'
 ""Plug 'Konfekt/FastFold'
-Plug 'python-mode/python-mode', {'branch': 'develop'} " better python support than builtin one
+Plug 'python-mode/python-mode', {'branch': 'develop', 'for': 'python'} " better python support than builtin one
 Plug 'vim-scripts/bash-support.vim'
 ""Plug 'xolox/vim-session'
 ""Plug 'xolox/vim-misc'
