@@ -117,6 +117,9 @@ endif
 " continue in commenting
 autocmd BufRead,BufNewFile * set formatoptions-=o
 
+" Remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+
 " Always show the status line
 set laststatus=2
 
