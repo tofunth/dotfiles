@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefile
+set -euo pipefail
 
 dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-1 "['<Super>1']"
 dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-2 "['<Super>2']"
