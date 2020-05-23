@@ -10,8 +10,8 @@ let maplocalleader = ' '
 syntax on
 
 " turn line numbers on
-"set number " fixed style
-"set nu rnu " relative style
+set number " fixed style
+set nu rnu " relative style
 
 " enable mouse rolling
 if has("mouse")
