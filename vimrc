@@ -1,7 +1,6 @@
 "-------------------------------------------------------------------------------
 " BASIC CUSTOMIZATIONS
 "-------------------------------------------------------------------------------
-
 set nocompatible
 
 let mapleader      = ' '
@@ -120,21 +119,24 @@ autocmd BufRead,BufNewFile * set formatoptions-=o
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
 
-" Always show the status line
+" " Always show the status line
 set laststatus=2
+"
+" " Format the status line
+" set statusline=%m                                   "modified
+" set statusline+=%t                                  "tail
+" set statusline+=\ [%{strlen(&fenc)?&fenc:'none'},   "file encoding
+" set statusline+=\ %{&ff}]                           "file format
+" set statusline+=\ %y                                "filetype
+" set statusline+=\ %r                                "read only flag
+" set statusline+=\ %h                                "help file flag
+" set statusline+=%=                                  "left/right separator
+" set statusline+=%{HasPaste()}                       "paste-mode
+" set statusline+=%l:%c                               "line:column
+" set statusline+=\ (%P)                              "percentage
 
-" Format the status line
-set statusline=%m                                   "modified
-set statusline+=%t                                  "tail
-set statusline+=\ [%{strlen(&fenc)?&fenc:'none'},   "file encoding
-set statusline+=\ %{&ff}]                           "file format
-set statusline+=\ %y                                "filetype
-set statusline+=\ %r                                "read only flag
-set statusline+=\ %h                                "help file flag
-set statusline+=%=                                  "left/right separator
-set statusline+=%{HasPaste()}                       "paste-mode
-set statusline+=%l:%c                               "line:column
-set statusline+=\ (%P)                              "percentage
+" disable folding
+set nofoldenable
 
 "-------------------------------------------------------------------------------
 " Color settings
@@ -145,21 +147,6 @@ if &term =~ '256color'
     "     " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
     set t_ut=
 endif
-
-set background=dark
-highligh MatchParen ctermfg=red ctermbg=blue
-highligh Visual ctermfg=red ctermbg=green
-highligh Search ctermfg=red ctermbg=lightyellow
-highlight StatusLine ctermfg=black ctermbg=darkcyan
-highlight ColorColumn ctermfg=red ctermbg=yellow
-highlight CursorLine cterm=NONE ctermfg=None ctermbg=darkred
-
-" Highlight trailing whitespaces and starting tabs
-highlight ExtraWhitespace ctermbg=lightblue
-au ColorScheme * highlight ExtraWhitespace
-au BufEnter * match ExtraWhitespace /\s\+$\|\t/
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$\|\t/
-au InsertLeave * match ExtraWhiteSpace /\s\+$\|\t/
 
 " highlight active pane with column
 augroup BgHighlight
@@ -186,6 +173,9 @@ Plug 'junegunn/fzf.vim'
 ""Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 ""Plug 'vim-latex/vim-latex'
 Plug 'w0rp/ale' " async lint
+Plug 'junegunn/seoul256.vim'
+Plug 'sickill/vim-monokai'
+Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
@@ -207,6 +197,8 @@ Plug 'vim-scripts/bash-support.vim'
 ""Plug 'honza/vim-snippets'
 Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
+Plug 'itchyny/lightline.vim'
+Plug 'tomtom/tcomment_vim'
 " Initialize plugin system
 call plug#end()
 
@@ -247,6 +239,17 @@ function! s:find_git_root()
 endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()
+
+" Theme
+" let g:seoul256_background = 235
+" colo seoul256
+" let g:seoul256_background = 255
+" colo seoul256-light
+" colo monokai
+set t_Co=256
+set bg=dark
+colo PaperColor
+
 
 " JS libraries syntax
 let g:used_javascript_libs = 'angularjs,jasmine,gulp'
@@ -358,7 +361,6 @@ nnoremap <silent> <Leader>gf :GFiles<CR>
 nnoremap <silent> <Leader>gg :GGrep<CR>
 nnoremap <silent> <Leader>bb :Buffers<CR>
 nnoremap <silent> <Leader>pf :ProjectFiles<CR>
-
 "-------------------------------------------------------------------------------
 " DWIM KEY BINDINGS
 "-------------------------------------------------------------------------------
@@ -383,4 +385,3 @@ xnoremap <silent> ,bl :<C-W>BLines <C-R><C-*><CR>
 set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 nnoremap <silent> ,rg :grep <C-R><C-W><CR>
 xnoremap <silent> ,rg :<C-W>grep <C-R><C-*><CR>
-
