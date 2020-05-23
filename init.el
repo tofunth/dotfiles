@@ -1,6 +1,8 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; CORE BOOTSTRAP
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; init.el --- Initialization file for Emacs
+;;; Commentary: Emacs Startup File --- initialization for Emacs
+
+;;; init.el --- Initialization file for Emacs
+
 
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection.  The default is 800 kilobytes.  Measured in bytes.
@@ -65,7 +67,7 @@
  ns-use-srgb-colorspace nil                       ; Don't use sRGB colors
  recenter-positions '(5 top bottom)               ; Set re-centering positions
  scroll-conservatively most-positive-fixnum       ; Always scroll by one line
- scroll-margin 10                                 ; Add a margin when scrolling vertically
+ scroll-margin 5                                 ; Add a margin when scrolling vertically
  select-enable-clipboard t                        ; Merge system's and Emacs' clipboard
  sentence-end-double-space nil                    ; End a sentence after a dot and a space
  show-trailing-whitespace nil                     ; Display trailing whitespaces
@@ -88,6 +90,8 @@
 (put 'downcase-region 'disabled nil)              ; Enable downcase-region
 (put 'upcase-region 'disabled nil)                ; Enable upcase-region
 (set-default-coding-systems 'utf-8)               ; Default to utf-8 encoding
+(show-paren-mode 1)                               ; Show matching parenthesis
+(linum-mode 1)                                    ; Show line number
 
 (add-hook 'focus-out-hook #'garbage-collect)      ; Snappier
 
@@ -119,6 +123,20 @@
        (kill-local-variable 'text-scale-mode-amount)
        (setq-default text-scale-mode-amount (+ text-scale-mode-amount inc))
        (global-text-scale-mode 1))
+
+;; undo-tree
+(use-package undo-tree
+  :ensure t
+  :config
+  (undo-tree-mode))
+
+(use-package fill-column-indicator
+  :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook (lambda ()(fci-mode 1)))
+  (add-hook 'python-mode-hook (lambda () (fci-mode 1)))
+  (add-hook 'shell-mode-hook (lambda () (fci-mode 1)))
+  (add-hook 'groovy-mode-hook (lambda () (fci-mode 1))))
 
 ;; Which Key
 (use-package which-key
@@ -210,7 +228,9 @@
 (use-package flycheck
   :defer 1
   :ensure t
-  :init (global-flycheck-mode))
+  :init (global-flycheck-mode)
+  :config
+  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; VERSION CONTROL
@@ -274,7 +294,9 @@
 ;; treemacs
 (use-package treemacs
   :defer 1
-  :ensure t)
+  :ensure t
+  :config
+  (treemacs-follow-mode))
 
 ;; ripgrep
 (use-package rg
