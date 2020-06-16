@@ -186,11 +186,11 @@ Plug 'tpope/vim-fugitive' " integrate Git
 Plug 'tpope/vim-eunuch' " Some useful shell commands
 Plug 'mattn/emmet-vim' " this plugin is useful for html, xml editing (more advanced than ragtag)
 Plug 'othree/javascript-libraries-syntax.vim' " syntax libraris for different js projects
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'nathanaelkane/vim-indent-guides'
 ""Plug 'Konfekt/FastFold'
 Plug 'python-mode/python-mode', {'branch': 'develop', 'for': 'python'} " better python support than builtin one
-Plug 'vim-scripts/bash-support.vim'
+" Plug 'vim-scripts/bash-support.vim'
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --all' }
 ""Plug 'xolox/vim-session'
 ""Plug 'xolox/vim-misc'
 ""Plug 'SirVer/ultisnips'
@@ -199,6 +199,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
 Plug 'tomtom/tcomment_vim'
+Plug 'pearofducks/ansible-vim'
 " Initialize plugin system
 call plug#end()
 
@@ -210,6 +211,7 @@ call plug#end()
 " automatically open NERDTree when starting vim with a directory
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+let g:NERDTreeWinSize=50
 
 " tagbar
 let g:tagbar_autofocus = 1  " jump to tagbar right after opening
@@ -332,6 +334,10 @@ nnoremap [b :bprev<CR>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
+" Fix syntax highlighting by refreshing it
+nnoremap <silent> <Leader>hh :syntax sync fromstart<CR>
+xnoremap <silent> <Leader>hh :syntax sync fromstart<CR>
+
 "-------------------------------------------------------------------------------
 " PLUGINS KEY BINDINGS
 "-------------------------------------------------------------------------------
@@ -351,6 +357,9 @@ nnoremap <silent> <Leader>aa :ALEToggle<CR>
 nmap ]a <Plug>(ale_next_wrap)
 nmap [a <Plug>(ale_previous_wrap)
 
+" buffer
+nnoremap <silent> <Leader>be :bufdo e<CR>
+
 "-------------------------------------------------------------------------------
 " FZF KEY BINDINGS
 "-------------------------------------------------------------------------------
@@ -360,6 +369,7 @@ nnoremap <silent> <Leader>rr :Rg<CR>
 nnoremap <silent> <Leader>gf :GFiles<CR>
 nnoremap <silent> <Leader>gg :GGrep<CR>
 nnoremap <silent> <Leader>bb :Buffers<CR>
+nnoremap <silent> <Leader>bl :BLines<CR>
 nnoremap <silent> <Leader>pf :ProjectFiles<CR>
 "-------------------------------------------------------------------------------
 " DWIM KEY BINDINGS
