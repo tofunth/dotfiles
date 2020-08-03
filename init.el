@@ -25,15 +25,6 @@
 ;; Theme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package material-theme
-  :ensure t
-  :disabled
-  )
-
-(if (display-graphic-p)
-  (load-theme 'material t)
-  )
-
 (use-package rainbow-delimiters
   :ensure t
   :config
@@ -176,19 +167,6 @@
   (company-require-match nil)
   (company-tooltip-align-annotations t))
 
-;; C/C++
-(use-package cmake-ide
-  :defer 2
-  :ensure t
-  )
-
-(use-package rtags
-  :defer 2
-  :ensure t
-  :after cmake-ide
-  :config
-  (cmake-ide-setup))
-
 ;; jenkins/ groovy
 (use-package groovy-mode
   :defer 1
@@ -298,11 +276,6 @@
   :config
   (treemacs-follow-mode))
 
-;; ripgrep
-(use-package rg
-  :defer 1
-  :ensure t)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LATEX STUFFS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -378,14 +351,6 @@
            :which-key "increase font size")
    "w-"  '((lambda () (interactive) (global-text-scale-adjust -1))
            :which-key "decrease font size")
-   ;; ripgrep
-   "rr"  '(rg :which-key "rg")
-   "rp"  '(rg-project :which-key "rg project")
-   "rd"  '(rg-dwim :which-key "rg at point")
-   "rl"  '(rg-list-searches :which-key "rg searches list")
-   "rs"  '(rg-save-search :which-key "rg save search")
-   "rS"  '(rg-save-search-as-name :which-key "rg save search as name")
-   "rt"  '(rg-literal :which-key "rg non-regex")
    ;; Others
    "at"  '(ansi-term :which-key "open terminal")))
 
@@ -399,10 +364,6 @@
 (global-set-key (kbd "C-c g b") 'magit-blame)
 (global-set-key (kbd "C-c g f") 'helm-ls-git-ls)
 (global-set-key (kbd "C-c g s") 'helm-grep-do-git-grep)
-
-;; ripgrep
-(global-set-key (kbd "C-c r r") 'rg)
-(global-set-key (kbd "C-c r d") 'rg-dwim)
 
 ;; file navigation
 (global-set-key (kbd "C-c f t") 'treemacs)
