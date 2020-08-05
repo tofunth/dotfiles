@@ -3,10 +3,18 @@
 
 ;;; init.el --- Initialization file for Emacs
 
+(setq user-full-name "Hieu Nguyen"
+      user-mail-address "tofunth@gmail.com")
+
 
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection.  The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
+
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -19,17 +27,8 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-(require 'use-package)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Theme
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package rainbow-delimiters
-  :ensure t
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-  )
+(eval-when-compile
+  (require 'use-package))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Better defaults
@@ -269,13 +268,6 @@
   :custom
   (whitespace-style '(face empty indentation::space tab trailing)))
 
-;; treemacs
-(use-package treemacs
-  :defer 1
-  :ensure t
-  :config
-  (treemacs-follow-mode))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LATEX STUFFS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -310,50 +302,6 @@
 ;; KEY BINDING
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Custom keybinding
-(use-package general
-  :ensure t
-  :config
-  (general-define-key
-   :states '(normal visual insert emacs)
-   :keymaps 'override
-   :prefix "SPC"
-   :non-normal-prefix "M-SPC"
-   ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
-   "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
-   "SPC" '(helm-M-x :which-key "M-x")
-   ;; File Navigation
-   "ff"  '(helm-find-files :which-key "find files")
-   "ft"  '(treemacs :which-key "treemacs")
-   "fl"  '(helm-locate :which-key "locate file")
-   "pff" '(helm-projectile-find-file :which-key "projectile find file")
-   "pfd" '(helm-projectile-find-file-dwim :which-key "projectile find file at point")
-   ;; Buffers
-   "bb"  '(helm-buffers-list :which-key "buffers list")
-   "bl"  '(buf-move-right :which-key "move right")
-   "bh"  '(buf-move-left :which-key "move left")
-   "bk"  '(buf-move-up :which-key "move up")
-   "bj"  '(buf-move-down :which-key "move bottom")
-   "bf"  '(format-buffer :which-key "format the whole buffer")
-   ;; magit
-   "gg"  '(magit-status :which-key "magit")
-   "gb"  '(magit-blame :which-key "magit blame")
-   "gf" '(helm-ls-git-ls :which-key "git find file")
-   "gs"  '(helm-grep-do-git-grep :which-key "git grep")
-   ;; latex
-   "lca"  '(TeX-command-run-all :which-key "tex compile all")
-   "lbt"  '(helm-bibtex :which-key "helm bibtex")
-   ;; QoL
-   "w="  '((lambda () (interactive)
-             (global-text-scale-adjust (- text-scale-mode-amount))
-             (global-text-scale-mode -1)) :which-key "set default font size")
-   "w+"  '((lambda () (interactive) (global-text-scale-adjust 1))
-           :which-key "increase font size")
-   "w-"  '((lambda () (interactive) (global-text-scale-adjust -1))
-           :which-key "decrease font size")
-   ;; Others
-   "at"  '(ansi-term :which-key "open terminal")))
-
 ;; override default keybindings
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
@@ -366,8 +314,7 @@
 (global-set-key (kbd "C-c g s") 'helm-grep-do-git-grep)
 
 ;; file navigation
-(global-set-key (kbd "C-c f t") 'treemacs)
-(global-set-key (kbd "C-c f l") 'helm-locate)
+ (global-set-key (kbd "C-c f l") 'helm-locate)
 
 ;; QoL
 (global-set-key (kbd "C-c w =") '(lambda () (interactive)
@@ -381,8 +328,9 @@
                 '(lambda () (interactive) (global-text-scale-adjust -1)))
 
 ;; coding
-(global-set-key (kbd "C-c c m") 'match-paren)
 (global-set-key (kbd "C-c c c") 'comment-or-uncomment-region)
+(global-set-key (kbd "C-c c m") 'match-paren)
+(global-set-key "%" 'match-paren)
 
 (defun match-paren (arg)
   "Go to the matching paren if on a paren; otherwise insert %."
@@ -408,9 +356,12 @@
    (local-set-key [C-S-left]  'buf-move-left)
    (local-set-key [C-S-right] 'buf-move-right)))
 
-;; Make startup faster by reducing the frequency of garbage
-;; collection.  The default is 800 kilobytes.  Measured in bytes.
-(setq gc-cons-threshold (* 50 1000 1000))
+(defun backward-delete-word (arg)
+  "Delete characters backward until encountering the beginning of a word.
+With argument ARG, do this that many times."
+ (interactive "p")
+  (delete-region (point) (progn (backward-word arg) (point))))
+(global-set-key (kbd "M-<backspace>") 'backward-delete-word)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom in a seperate file
