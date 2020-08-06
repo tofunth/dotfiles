@@ -76,7 +76,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)                     ; Replace yes/no prompts with y/n
 (global-subword-mode 1)                           ; Iterate through CamelCase words
 (menu-bar-mode 0)                                 ; Disable the menu bar
-(mouse-avoidance-mode 'banish)                    ; Avoid collision of mouse with point
+(mouse-avoidance-mode 'exile)                    ; Avoid collision of mouse with point
 (put 'downcase-region 'disabled nil)              ; Enable downcase-region
 (put 'upcase-region 'disabled nil)                ; Enable upcase-region
 (set-default-coding-systems 'utf-8)               ; Default to utf-8 encoding
@@ -118,7 +118,7 @@
 (use-package undo-tree
   :ensure t
   :config
-  (undo-tree-mode))
+  (global-undo-tree-mode))
 
 (use-package fill-column-indicator
   :ensure t
@@ -362,6 +362,49 @@ With argument ARG, do this that many times."
  (interactive "p")
   (delete-region (point) (progn (backward-word arg) (point))))
 (global-set-key (kbd "M-<backspace>") 'backward-delete-word)
+
+(defun delete-line (&optional arg)
+  "Delete the rest of the current line; if no nonblanks there, delete thru newline.
+With prefix argument ARG, delete that many lines from point.
+Negative arguments delete lines backward.
+With zero argument, delete the text before point on the current line.
+
+When calling from a program, nil means \"no arg\",
+a number counts as a prefix arg.
+
+If `show-trailing-whitespace' is non-nil, this command will just
+delete the rest of the current line, even if there are no nonblanks
+there.
+
+If option `kill-whole-line' is non-nil, then this command deletes the whole line
+including its terminating newline, when used at the beginning of a line
+with no argument.
+
+If the buffer is read-only, Emacs will beep and refrain from deleting
+the line."
+  (interactive "P")
+  (delete-region
+   (point)
+   (progn
+     (if arg
+         (forward-visible-line (prefix-numeric-value arg))
+       (if (eobp)
+           (signal 'end-of-buffer nil))
+       (let ((end
+              (save-excursion
+                (end-of-visible-line) (point))))
+         (if (or (save-excursion
+                   ;; If trailing whitespace is visible,
+                   ;; don't treat it as nothing.
+                   (unless show-trailing-whitespace
+                     (skip-chars-forward " \t" end))
+                   (= (point) end))
+                 (and kill-whole-line (bolp)))
+             (forward-visible-line 1)
+           (goto-char end))))
+     (point))))
+
+(global-set-key (kbd "C-k") 'delete-line)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Custom in a seperate file
