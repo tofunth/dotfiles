@@ -66,7 +66,7 @@
  help-window-select t                             ; Focus new help windows when opened
  indent-tabs-mode nil                             ; Stop using tabs to indent
  inhibit-startup-screen t                         ; Disable start-up screen
- initial-scratch-message ";; Nhap..."             ; Empty the initial *scratch* buffer
+ initial-scratch-message ";; Nothing really matters..."             ; Empty the initial *scratch* buffer
  mouse-yank-at-point t                            ; Yank at point rather than pointer
  ns-use-srgb-colorspace nil                       ; Don't use sRGB colors
  recenter-positions '(5 top bottom)               ; Set re-centering positions
