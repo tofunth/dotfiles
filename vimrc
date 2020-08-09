@@ -190,7 +190,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 ""Plug 'Konfekt/FastFold'
 Plug 'python-mode/python-mode', {'branch': 'develop', 'for': 'python'} " better python support than builtin one
 " Plug 'vim-scripts/bash-support.vim'
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --all' }
+" Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --all' }
 ""Plug 'xolox/vim-session'
 ""Plug 'xolox/vim-misc'
 ""Plug 'SirVer/ultisnips'
