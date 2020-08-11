@@ -274,13 +274,13 @@
   (setq projectile-enable-caching t))
 
 ;; Highlight whitespaces
-(use-package whitespace
-  :ensure nil
-  :hook
-  ((prog-mode . whitespace-turn-on)
-   (text-mode . whitespace-turn-on))
-  :custom
-  (whitespace-style '(face empty indentation::space tab trailing)))
+;; (use-package whitespace
+;;   :ensure nil
+;;   :hook
+;;   ((prog-mode . whitespace-turn-on)
+;;    (text-mode . whitespace-turn-on))
+;;   :custom
+;;   (whitespace-style '(face empty indentation::space tab trailing)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LATEX STUFFS
