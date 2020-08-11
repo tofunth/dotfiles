@@ -10,7 +10,6 @@ let maplocalleader = ' '
 syntax on
 
 " turn line numbers on
-set number " fixed style
 set nu rnu " relative style
 
 " enable mouse rolling
@@ -165,11 +164,8 @@ Plug 'mkitt/tabline.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-""Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 ""Plug 'vim-latex/vim-latex'
 Plug 'w0rp/ale' " async lint
-Plug 'junegunn/seoul256.vim'
-Plug 'sickill/vim-monokai'
 Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'godlygeek/tabular'
@@ -184,10 +180,7 @@ Plug 'othree/javascript-libraries-syntax.vim' " syntax libraris for different js
 Plug 'nathanaelkane/vim-indent-guides'
 ""Plug 'Konfekt/FastFold'
 Plug 'python-mode/python-mode', {'branch': 'develop', 'for': 'python'} " better python support than builtin one
-" Plug 'vim-scripts/bash-support.vim'
-" Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --all' }
-""Plug 'xolox/vim-session'
-""Plug 'xolox/vim-misc'
+Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --all' }
 ""Plug 'SirVer/ultisnips'
 ""Plug 'honza/vim-snippets'
 Plug 'vimwiki/vimwiki'
