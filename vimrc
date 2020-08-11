@@ -107,11 +107,6 @@ set splitright
 " set GUI vim tab label: tab number + filename + sign
 set guitablabel=\[%N\]\ %t\ %M
 
-" set GUI font
-if has('gui_running')
-    set guifont=Inconsolata\ Regular\ 13
-endif
-
 " Disable format option with command 'o' in normal mode not to have it
 " continue in commenting
 autocmd BufRead,BufNewFile * set formatoptions-=o
@@ -211,7 +206,7 @@ call plug#end()
 " automatically open NERDTree when starting vim with a directory
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-let g:NERDTreeWinSize=50
+let g:NERDTreeWinSize=35
 
 " tagbar
 let g:tagbar_autofocus = 1  " jump to tagbar right after opening
@@ -249,7 +244,7 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 " colo seoul256-light
 " colo monokai
 set t_Co=256
-set bg=dark
+set bg=light
 colo PaperColor
 
 
@@ -392,6 +387,6 @@ nnoremap <silent> ,ss /<C-R><C-W><CR>
 nnoremap <silent> ,bl :BLines <C-R><C-W><CR>
 xnoremap <silent> ,bl :<C-W>BLines <C-R><C-*><CR>
 " Grep and pipe the results to quickfix
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-nnoremap <silent> ,rg :grep <C-R><C-W><CR>
-xnoremap <silent> ,rg :<C-W>grep <C-R><C-*><CR>
+" set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+" nnoremap <silent> ,rg :grep <C-R><C-W><CR>
+" xnoremap <silent> ,rg :<C-W>grep <C-R><C-*><CR>
