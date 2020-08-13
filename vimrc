@@ -10,7 +10,7 @@ let maplocalleader = ' '
 syntax on
 
 " turn line numbers on
-set nu rnu " relative style
+set nu
 
 " enable mouse rolling
 if has("mouse")
@@ -188,6 +188,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'pearofducks/ansible-vim'
+Plug 'mfukar/robotframework-vim'
 " Initialize plugin system
 call plug#end()
 
@@ -200,6 +201,9 @@ call plug#end()
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 let g:NERDTreeWinSize=35
+
+" YouCompleteMe
+let g:ycm_show_diagnostics_ui = 0
 
 " tagbar
 let g:tagbar_autofocus = 1  " jump to tagbar right after opening
@@ -326,6 +330,10 @@ map <leader>pp :setlocal paste!<cr>
 nnoremap <silent> <Leader>hh :syntax sync fromstart<CR>
 xnoremap <silent> <Leader>hh :syntax sync fromstart<CR>
 
+" Remap Escape
+imap jk <Esc>
+imap kj <Esc>
+
 "-------------------------------------------------------------------------------
 " PLUGINS KEY BINDINGS
 "-------------------------------------------------------------------------------
@@ -359,6 +367,7 @@ nnoremap <silent> <Leader>gg :GGrep<CR>
 nnoremap <silent> <Leader>bb :Buffers<CR>
 nnoremap <silent> <Leader>bl :BLines<CR>
 nnoremap <silent> <Leader>pf :ProjectFiles<CR>
+nnoremap <silent> <Leader>gs :Git<CR>
 "-------------------------------------------------------------------------------
 " DWIM KEY BINDINGS
 "-------------------------------------------------------------------------------
@@ -380,6 +389,6 @@ nnoremap <silent> ,ss /<C-R><C-W><CR>
 nnoremap <silent> ,bl :BLines <C-R><C-W><CR>
 xnoremap <silent> ,bl :<C-W>BLines <C-R><C-*><CR>
 " Grep and pipe the results to quickfix
-" set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-" nnoremap <silent> ,rg :grep <C-R><C-W><CR>
-" xnoremap <silent> ,rg :<C-W>grep <C-R><C-*><CR>
+set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+nnoremap <silent> ,rg :grep <C-R><C-W><CR>
+xnoremap <silent> ,rg :<C-W>grep <C-R><C-*><CR>
