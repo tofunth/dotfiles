@@ -331,8 +331,23 @@ nnoremap <silent> <Leader>hh :syntax sync fromstart<CR>
 xnoremap <silent> <Leader>hh :syntax sync fromstart<CR>
 
 " Remap Escape
-imap jk <Esc>
-imap kj <Esc>
+inoremap jk <Esc>
+xnoremap jk <Esc>
+cnoremap jk <C-c>
+inoremap kj <Esc>
+xnoremap kj <Esc>
+cnoremap kj <C-c>
+
+" Zoom
+function! s:zoom()
+  if winnr('$') > 1
+    tab split
+  elseif len(filter(map(range(tabpagenr('$')), 'tabpagebuflist(v:val + 1)'),
+                  \ 'index(v:val, '.bufnr('').') >= 0')) > 1
+    tabclose
+  endif
+endfunction
+nnoremap <silent> <leader>zz :call <sid>zoom()<cr>
 
 "-------------------------------------------------------------------------------
 " PLUGINS KEY BINDINGS
