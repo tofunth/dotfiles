@@ -1,10 +1,12 @@
 [alias]
     a = add
     b = branch
+    c = commit
     co = checkout
     cp = cherry-pick
     d = diff
     f = fetch
+    l = log
     p = push
     rb = rebase
     rs = reset
