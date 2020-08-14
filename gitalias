@@ -1,0 +1,11 @@
+[alias]
+    a = add
+    b = branch
+    co = checkout
+    cp = cherry-pick
+    d = diff
+    f = fetch
+    p = push
+    rb = rebase
+    rs = reset
+    s = status
