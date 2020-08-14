@@ -330,14 +330,6 @@ map <leader>pp :setlocal paste!<cr>
 nnoremap <silent> <Leader>hh :syntax sync fromstart<CR>
 xnoremap <silent> <Leader>hh :syntax sync fromstart<CR>
 
-" Remap Escape
-inoremap jk <Esc>
-xnoremap jk <Esc>
-cnoremap jk <C-c>
-inoremap kj <Esc>
-xnoremap kj <Esc>
-cnoremap kj <C-c>
-
 " Zoom
 function! s:zoom()
   if winnr('$') > 1
