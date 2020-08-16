@@ -17,6 +17,10 @@ if has("mouse")
     set mouse=a
 endif
 
+if has("gui_macvim")
+    set guifont=Menlo\ Regular:h13
+endif
+
 " hide buffer when switching, thus undo history is retained
 set hidden
 
