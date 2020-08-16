@@ -336,14 +336,18 @@ xnoremap <silent> <Leader>hh :syntax sync fromstart<CR>
 
 " Zoom
 function! s:zoom()
-  if winnr('$') > 1
-    tab split
-  elseif len(filter(map(range(tabpagenr('$')), 'tabpagebuflist(v:val + 1)'),
-                  \ 'index(v:val, '.bufnr('').') >= 0')) > 1
-    tabclose
-  endif
+    if winnr('$') > 1
+        tab split
+    elseif len(filter(map(range(tabpagenr('$')), 'tabpagebuflist(v:val + 1)'),
+                \ 'index(v:val, '.bufnr('').') >= 0')) > 1
+        tabclose
+    endif
 endfunction
 nnoremap <silent> <leader>zz :call <sid>zoom()<cr>
+
+" Circulate window
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
 
 "-------------------------------------------------------------------------------
 " PLUGINS KEY BINDINGS
@@ -357,7 +361,7 @@ nnoremap <silent> <Leader>nf :NERDTreeFind<CR>
 nnoremap <silent> <Leader>tt :TagbarToggle<CR>
 
 " autoformat
-noremap <F3> :Autoformat<CR>
+nnoremap <silent> <Leader>cc :Autoformat<CR>
 
 " ALE
 nnoremap <silent> <Leader>aa :ALEToggle<CR>
