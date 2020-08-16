@@ -328,7 +328,9 @@ nnoremap ]b :bnext<CR>
 nnoremap [b :bprev<CR>
 
 " Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
+nnoremap <C-p> :setlocal paste!<cr>
+xnoremap <C-p> :setlocal paste!<cr>
+inoremap <C-p> :setlocal paste!<cr>
 
 " Fix syntax highlighting by refreshing it
 nnoremap <silent> <Leader>hh :syntax sync fromstart<CR>
