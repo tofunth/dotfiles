@@ -11,7 +11,9 @@
     "$": { "type": "scroll.end" },
     "f": { "type": "follow.start", "newTab": false },
     "F": { "type": "follow.start", "newTab": true, "background": false },
-    "<S-Esc>": { "type": "addon.toggle.enabled" }
+    "<S-Esc>": { "type": "addon.toggle.enabled" },
+    "u": { "type": "scroll.pages", "count": -0.5 },
+    "d": { "type": "scroll.pages", "count": 0.5 }
   },
   "search": {
     "default": "google",
