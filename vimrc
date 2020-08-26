@@ -239,11 +239,6 @@ endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
 " Theme
-" let g:seoul256_background = 235
-" colo seoul256
-" let g:seoul256_background = 255
-" colo seoul256-light
-" colo monokai
 set t_Co=256
 set bg=light
 colo PaperColor
@@ -347,10 +342,6 @@ function! s:zoom()
 endfunction
 nnoremap <silent> <leader>zz :call <sid>zoom()<cr>
 
-" Circulate window
-nnoremap <tab>   <c-w>w
-nnoremap <S-tab> <c-w>W
-
 "-------------------------------------------------------------------------------
 " PLUGINS KEY BINDINGS
 "-------------------------------------------------------------------------------
@@ -381,6 +372,8 @@ nnoremap <silent> <Leader>ff :Files<CR>
 nnoremap <silent> <Leader>rr :Rg<CR>
 nnoremap <silent> <Leader>gf :GFiles<CR>
 nnoremap <silent> <Leader>gg :GGrep<CR>
+nnoremap <silent> <Leader>gb :Gblame<CR>
+nnoremap <silent> <Leader>gs :Git<CR>
 nnoremap <silent> <Leader>bb :Buffers<CR>
 nnoremap <silent> <Leader>bl :BLines<CR>
 nnoremap <silent> <Leader>pf :ProjectFiles<CR>
@@ -406,6 +399,8 @@ nnoremap <silent> ,ss /<C-R><C-W><CR>
 nnoremap <silent> ,bl :BLines <C-R><C-W><CR>
 xnoremap <silent> ,bl :<C-W>BLines <C-R><C-*><CR>
 " Grep and pipe the results to quickfix
-set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+if (executable("rg"))
+    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+endif
 nnoremap <silent> ,rg :grep <C-R><C-W><CR>
 xnoremap <silent> ,rg :<C-W>grep <C-R><C-*><CR>
