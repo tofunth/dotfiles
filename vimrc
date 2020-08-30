@@ -240,7 +240,7 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 
 " Theme
 set t_Co=256
-set bg=light
+set bg=dark
 colo PaperColor
 
 

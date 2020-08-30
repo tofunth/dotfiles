@@ -34,7 +34,7 @@
   :ensure t
   :config
   (if (display-graphic-p)
-  (load-theme 'material-light t)
+  (load-theme 'material t)
   )
   )
 
