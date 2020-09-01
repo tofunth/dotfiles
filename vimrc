@@ -170,7 +170,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 ""Plug 'vim-latex/vim-latex'
 Plug 'w0rp/ale' " async lint
-Plug 'NLKNguyen/papercolor-theme'
+" Plug 'NLKNguyen/papercolor-theme'
+Plug 'robertmeta/nofrils'
 
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
@@ -184,7 +185,11 @@ Plug 'othree/javascript-libraries-syntax.vim' " syntax libraris for different js
 Plug 'nathanaelkane/vim-indent-guides'
 ""Plug 'Konfekt/FastFold'
 Plug 'python-mode/python-mode', {'branch': 'develop', 'for': 'python'} " better python support than builtin one
-Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --all' }
+if has("nvim")
+    Plug 'neoclide/coc.nvim'
+else
+    Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --all' }
+endif
 ""Plug 'SirVer/ultisnips'
 ""Plug 'honza/vim-snippets'
 Plug 'vimwiki/vimwiki'
@@ -193,6 +198,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'pearofducks/ansible-vim'
 Plug 'mfukar/robotframework-vim'
+Plug 'fatih/vim-go'
 " Initialize plugin system
 call plug#end()
 
@@ -240,8 +246,9 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 
 " Theme
 set t_Co=256
-set bg=dark
-colo PaperColor
+" set bg=dark
+" colo PaperColor
+colo nofrils-acme
 
 
 " JS libraries syntax
