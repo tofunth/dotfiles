@@ -170,7 +170,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 ""Plug 'vim-latex/vim-latex'
 Plug 'w0rp/ale' " async lint
-" Plug 'NLKNguyen/papercolor-theme'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'robertmeta/nofrils'
 
 Plug 'godlygeek/tabular'
@@ -186,7 +186,10 @@ Plug 'nathanaelkane/vim-indent-guides'
 ""Plug 'Konfekt/FastFold'
 Plug 'python-mode/python-mode', {'branch': 'develop', 'for': 'python'} " better python support than builtin one
 if has("nvim")
-    Plug 'neoclide/coc.nvim'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'mattn/vim-lsp-settings'
 else
     Plug 'Valloric/YouCompleteMe', { 'do': 'python3 install.py --all' }
 endif
@@ -246,9 +249,9 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 
 " Theme
 set t_Co=256
-" set bg=dark
-" colo PaperColor
-colo nofrils-acme
+set bg=dark
+colo PaperColor
+" colo nofrils-acme
 
 
 " JS libraries syntax
@@ -411,3 +414,22 @@ if (executable("rg"))
 endif
 nnoremap <silent> ,rg :grep <C-R><C-W><CR>
 xnoremap <silent> ,rg :<C-W>grep <C-R><C-*><CR>
+
+
+"-------------------------------------------------------------------------------
+" LSP
+"-------------------------------------------------------------------------------
+nnoremap <silent> <Leader>ld :LspDefinition<CR>
+nnoremap <silent> <Leader>lr :LspReferences<CR>
+nnoremap <silent> <Leader>li :LspImplementation<CR>
+nnoremap <silent> <Leader>lt :LspTypeDefinition<CR>
+nnoremap <silent> <leader>rn :LspRename<CR>
+nnoremap <silent> [l :LspPreviousDiagnostic<CR>
+nnoremap <silent> ]l :LspNextDiagnostic<CR>
+nnoremap <silent> K :LspHover<CR>
+
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('~/vim-lsp.log')
+
+" for asyncomplete.vim log
+let g:asyncomplete_log_file = expand('~/asyncomplete.log')
