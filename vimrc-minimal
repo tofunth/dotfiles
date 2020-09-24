@@ -69,7 +69,6 @@ set wildmenu
 set wildmode=longest:full,full
 
 " minimal menu bar
-let g:netrw_banner=0        " disable annoying banner
 let g:netrw_browse_split=4  " open in prior window
 let g:netrw_altv=1          " open splits to the right
 let g:netrw_liststyle=3     " tree view
@@ -151,30 +150,30 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
-Plug 'godlygeek/tabular'      " Quick tabularize
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-surround'     " allow easy editing surrounding tags
-Plug 'tpope/vim-fugitive'     " integrate Git
-Plug 'tpope/vim-eunuch'       " Some useful shell commands
-Plug 'tpope/vim-vinegar'       " Some useful shell commands
+Plug 'godlygeek/tabular'    " Quick tabularize
+Plug 'tpope/vim-surround'   " allow easy editing surrounding tags
+Plug 'tpope/vim-fugitive'   " integrate Git
+Plug 'tomtom/tcomment_vim'  " Toggle comment
 Plug 'mattn/emmet-vim'
-Plug 'tomtom/tcomment_vim'    " Toggle comment
+Plug 'sheerun/vim-polyglot'
 Plug 'vim-latex/vim-latex'
-
 if has("nvim")
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'mattn/vim-lsp-settings'
+   Plug 'neovim/nvim-lspconfig'
 endif
+Plug 'preservim/nerdtree'
 " Initialize plugin system
 call plug#end()
+
+"-------------------------------------------------------------------------------
+" NERD tree
+"-------------------------------------------------------------------------------
+noremap <silent> <Leader>nn :NERDTreeToggle<CR>
+noremap <silent> <Leader>nf :NERDTreeFind<CR>
 
 "-------------------------------------------------------------------------------
 " vim-latex
 "-------------------------------------------------------------------------------
 set shellslash
-set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_MultipleCompileFormats='pdf,bibtex,pdf'
@@ -253,24 +252,11 @@ noremap <silent> ,gf :GFiles <C-R><C-W><CR>
 " Git
 "-------------------------------------------------------------------------------
 noremap <silent> <Leader>gs :Git<CR>
-noremap <silent> <Leader>gb :GBlame<CR>
-
+noremap <silent> <Leader>gb :Gblame<CR>
 
 "-------------------------------------------------------------------------------
 " LSP
 "-------------------------------------------------------------------------------
-noremap <silent> <Leader>ld :LspDefinition<CR>
-noremap <silent> <Leader>lr :LspReferences<CR>
-noremap <silent> <Leader>li :LspImplementation<CR>
-noremap <silent> <Leader>lt :LspTypeDefinition<CR>
-noremap <silent> <Leader>ls :LspDocumentSwitchSourceHeader<CR>
-noremap <silent> <leader>rn :LspRename<CR>
-noremap <silent> [l :LspPreviousDiagnostic<CR>
-noremap <silent> ]l :LspNextDiagnostic<CR>
-noremap <silent> K :LspHover<CR>
-
-let g:lsp_log_verbose = 1
-let g:lsp_log_file = expand('~/vim-lsp.log')
-
-" for asyncomplete.vim log
-let g:asyncomplete_log_file = expand('~/asyncomplete.log')
+lua <<EOF
+require'nvim_lsp'.clangd.setup{}
+EOF
