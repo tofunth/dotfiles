@@ -27,6 +27,7 @@ runtime macros/matchit.vim
 " Use rg if it is available
 if (executable("rg"))
     set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
 " enable mouse rolling
@@ -69,11 +70,11 @@ set wildmenu
 set wildmode=longest:full,full
 
 " minimal menu bar
-let g:netrw_browse_split=4  " open in prior window
-let g:netrw_altv=1          " open splits to the right
-let g:netrw_liststyle=3     " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+" let g:netrw_browse_split=4  " open in prior window
+" let g:netrw_altv=1          " open splits to the right
+" let g:netrw_liststyle=3     " tree view
+" let g:netrw_list_hide=netrw_gitignore#Hide()
+" let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
 " keep cursor visible within 5 lines
 set scrolloff=5
@@ -150,6 +151,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'godlygeek/tabular'    " Quick tabularize
 Plug 'tpope/vim-surround'   " allow easy editing surrounding tags
 Plug 'tpope/vim-fugitive'   " integrate Git
@@ -160,13 +163,20 @@ Plug 'vim-latex/vim-latex'
 if has("nvim")
    Plug 'neovim/nvim-lspconfig'
 endif
-Plug 'preservim/nerdtree'
 " Initialize plugin system
 call plug#end()
 
 "-------------------------------------------------------------------------------
+" Theme
+"-------------------------------------------------------------------------------
+set bg=dark
+colo PaperColor
+
+"-------------------------------------------------------------------------------
 " NERD tree
 "-------------------------------------------------------------------------------
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 noremap <silent> <Leader>nn :NERDTreeToggle<CR>
 noremap <silent> <Leader>nf :NERDTreeFind<CR>
 
