@@ -157,12 +157,9 @@ Plug 'godlygeek/tabular'    " Quick tabularize
 Plug 'tpope/vim-surround'   " allow easy editing surrounding tags
 Plug 'tpope/vim-fugitive'   " integrate Git
 Plug 'tomtom/tcomment_vim'  " Toggle comment
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'vim-latex/vim-latex'
-if has("nvim")
-   Plug 'neovim/nvim-lspconfig'
-endif
 " Initialize plugin system
 call plug#end()
 
@@ -263,10 +260,3 @@ noremap <silent> ,gf :GFiles <C-R><C-W><CR>
 "-------------------------------------------------------------------------------
 noremap <silent> <Leader>gs :Git<CR>
 noremap <silent> <Leader>gb :Gblame<CR>
-
-"-------------------------------------------------------------------------------
-" LSP
-"-------------------------------------------------------------------------------
-lua <<EOF
-require'nvim_lsp'.clangd.setup{}
-EOF
