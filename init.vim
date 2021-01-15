@@ -24,12 +24,6 @@ filetype indent on
 " better search
 runtime macros/matchit.vim
 
-" Use rg if it is available
-if (executable("rg"))
-    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
-endif
-
 " enable mouse rolling
 if has("mouse")
     set mouse=a
@@ -152,7 +146,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'godlygeek/tabular'    " Quick tabularize
 Plug 'tpope/vim-surround'   " allow easy editing surrounding tags
 Plug 'tpope/vim-fugitive'   " integrate Git
@@ -167,7 +160,6 @@ call plug#end()
 " Theme
 "-------------------------------------------------------------------------------
 set bg=dark
-colo PaperColor
 
 "-------------------------------------------------------------------------------
 " NERD tree
